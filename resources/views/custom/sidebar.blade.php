@@ -4,7 +4,6 @@
         ['label' => 'Matches', 'icon' => 'home', 'route' => '/matches'],
         ['label' => 'Ranking', 'icon' => 'trophy', 'route' => '/ranking'],
         ['label' => 'Stats', 'icon' => 'chart-bar', 'route' => '/'],
-        ['label' => 'My Bets', 'icon' => 'home', 'route' => '/'],
         ['label' => 'Rules', 'icon' => 'newspaper', 'route' => '/'],
     ];
 @endphp

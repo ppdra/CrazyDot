@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\AccountPage;
 use App\Livewire\MatchesList;
+use App\Livewire\TagsPage;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,6 +25,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/account', AccountPage::class)->name('account');
+
+    Route::get('/tags', TagsPage::class)->name('tags');
+
 
 
      Route::get('/logout', LogoutController::class)

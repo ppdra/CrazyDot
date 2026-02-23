@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Game;
+use App\Models\Result;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,9 +18,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Game::class);
+            $table->foreignIdFor(Result::class);
             $table->boolean('status')->default(true);
             $table->string('obs')->nullable();
             $table->timestamps();
+
         });
     }
 

@@ -5,13 +5,14 @@ namespace App\Livewire;
 use App\Enum\MatchStatusEnum;
 use App\Models\Game;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class MatchesList extends Component
 {
     use WithPagination;
-    
+
     public array $countryOptsList;
     public array $groupOptsList;
     public array $stageOptsList;
@@ -20,8 +21,9 @@ class MatchesList extends Component
     public array $selectedStatus;
     public array $selectedGroup;
 
-    
+
     public ?string $selectedStage = '';
+    public ?string $selectedBetIsPlaced = '';
 
 
     public function mount()
@@ -30,7 +32,6 @@ class MatchesList extends Component
         $this->groupOptsList = $this->getGroupOptsList();
         $this->stageOptsList = $this->getStageOptsList();
         $this->statusOptsList = MatchStatusEnum::cases();
-
     }
 
     public function updatedSelectedCountry(): void
@@ -45,7 +46,7 @@ class MatchesList extends Component
     {
         $this->loadGames();
     }
-     public function updatedSelectedStatus(): void
+    public function updatedSelectedStatus(): void
     {
         $this->loadGames();
     }
@@ -53,19 +54,33 @@ class MatchesList extends Component
     private function loadGames()
     {
         return Game::query()
-            ->with(['homeTeam', 'awayTeam', 'gameResult'])
+            ->with(['homeTeam', 'awayTeam', 'gameResult', 'bets.result'])
             ->when($this->selectedCountry ?? null, function ($q) {
                 $q->where(function ($qq) {
                     $qq->whereIn('home_id', $this->selectedCountry)
                         ->orWhereIn('away_id', $this->selectedCountry);
                 });
             })
+            ->when($this->selectedBetIsPlaced, function ($q) {
+                if ($this->selectedBetIsPlaced === 'true') {
+                    $q->whereHas('bets', function ($betQuery) {
+                        $betQuery
+                            ->where('user_id', Auth::user()->id)
+                            ->where('status', true);
+                    });
+                } else {
+                    $q->whereDoesntHave('bets', function ($betQuery) {
+                        $betQuery
+                            ->where('user_id', Auth::user()->id)
+                            ->where('status', true);
+                    });
+                }
+            })
             ->when($this->selectedStatus ?? null, fn($q) => $q->whereIn('status', $this->selectedStatus))
             ->when($this->selectedGroup ?? null, fn($q) => $q->whereIn('group_name', $this->selectedGroup))
             ->when($this->selectedStage, fn($q) => $q->where('stage', $this->selectedStage))
             ->orderBy('utc_date')
             ->paginate(10);
-
     }
 
     // todo refactor to use cache

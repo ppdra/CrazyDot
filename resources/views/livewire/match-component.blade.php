@@ -12,7 +12,7 @@
             </div>
 
             <div class="flex space-x-2 ">
-                <x-ui.icon name="calendar-days" class="text-(--color-muted) size-5"  />
+                <x-ui.icon name="calendar-days" class="text-(--color-muted) size-5" />
 
                 <span
                     class="text-xs sm:text-sm text-(--color-muted)] text-right leading-tight truncate max-w-[60%] sm:max-w-none">
@@ -22,15 +22,22 @@
         </div>
 
         <!-- Secondary info -->
-        <div class="flex flex-wrap gap-2 sm:gap-3">
+        <div class="flex items-start justify-between gap-3">
+            <div>
+                @if ($match->stage === MatchStageEnum::GROUP_STAGE)
+                    <x-ui.badge size='sm'>{{ $match->group_name->label() }}</x-ui.badge>
+                    <x-ui.badge size='sm'>Matchday {{ $match->matchday }}</x-ui.badge>
+                @else
+                    <x-ui.badge size='sm'>{{ str_replace('_', ' ', $match->stage->name) }}</x-ui.badge>
+                @endif
+            </div>
 
-            @if ($match->stage === MatchStageEnum::GROUP_STAGE)
-                <x-ui.badge size='sm'>{{ $match->group_name->label() }}</x-ui.badge>
-                <x-ui.badge size='sm'>Matchday {{ $match->matchday }}</x-ui.badge>
-            @else
-                <x-ui.badge size='sm'>{{ str_replace('_', ' ', $match->stage->name) }}</x-ui.badge>
-            @endif
+            <div>
+                @if ($betIsPlaced)
+                    <x-ui.icon name="check-badge" class="text-green-500 size-5" />
+                @endif
 
+            </div>
         </div>
     </div>
 
@@ -84,110 +91,119 @@
                 <x-ui.tabs activeTab="bet">
                     <x-ui.tab.group class="justify-start">
                         <x-ui.tab label="Bet" name="bet" icon="pencil" />
-                        <x-ui.tab label="Results" name="results" icon="document-chart-bar" />
+                        @if ($match->utc_date->isPast())
+                            <x-ui.tab label="Results" name="results" icon="document-chart-bar" />
+                        @endif
                         <x-ui.tab label="Joker" name="joker" icon="cog-6-tooth" />
                     </x-ui.tab.group>
 
                     <x-ui.tab.panel name="bet">
-
                         <div class="flex items-center justify-center gap-8">
 
-                            <!-- 🔹 Time da Casa -->
                             <div class="flex flex-col items-center gap-3">
                                 <div class="flex items-center gap-2">
-                                    <!-- Botão diminuir -->
+
                                     <x-ui.button color='red' icon='minus' variant="outline" size="sm"
-                                        wire:click="decrementHome">
+                                        wire:click="decrementScore('home')">
 
                                     </x-ui.button>
 
                                     <x-ui.input class="w-16 text-center" wire:model="homeScore" type="text"
-                                        min="0">
-
+                                        min="0" disabled>
                                     </x-ui.input>
 
                                     <x-ui.button color='emerald' icon='plus' variant="outline" size="sm"
-                                        wire:click="incrementHome">
+                                        wire:click="incrementScore('home')">
                                     </x-ui.button>
                                 </div>
                             </div>
 
-                            <!-- separador -->
                             <span class="text-2xl font-bold text-(--color-primary)">x</span>
-
 
                             <div class="flex flex-col items-center gap-3">
                                 <div class="flex items-center gap-2">
 
                                     <x-ui.button color='red' icon='minus' variant="outline" size="sm"
-                                        wire:click="decrementAway">
+                                        wire:click="decrementScore('away')">
                                     </x-ui.button>
 
                                     <x-ui.input class="w-16 text-center" wire:model="awayScore" type="text"
-                                        min="0">
+                                        min="0" disabled>
 
                                     </x-ui.input>
 
                                     <x-ui.button color='emerald' icon='plus' variant="outline" size="sm"
-                                        wire:click="incrementAway">
+                                        wire:click="incrementScore('away')">
                                     </x-ui.button>
 
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
 
-                    </x-ui.tab.panel>
+                        <div class="grid md:grid-cols-2 sm:grid-cols-1 md:gap-3 sm:gap-1">
+                            @if ($match->utc_date->isFuture())
+                                <x-ui.button variant="outline" icon='bookmark-square' color="blue" class="w-full mt-6"
+                                    wire:click="saveUserBet">
+                                    Save
+                                </x-ui.button>
 
-                    <x-ui.tab.panel name='results'>
-                        @php
-                            $bets = [
-                                ['name' => 'Carlos', 'prediction' => '2 x 1', 'points' => 3],
-                                ['name' => 'Mariana', 'prediction' => '1 x 1', 'points' => 1],
-                                ['name' => 'João', 'prediction' => '3 x 0', 'points' => 0],
-                                ['name' => 'Fernanda', 'prediction' => '2 x 1', 'points' => 3],
-                                ['name' => 'Rafael', 'prediction' => '0 x 2', 'points' => 0],
-                            ];
-                        @endphp
-
-                        <div
-                            class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl overflow-hidden">
-
-                            <!-- Cabeçalho -->
-                            <div
-                                class="grid grid-cols-3 px-6 py-3 bg-(--color-surface) text-sm font-semibold text-(--color-primary)">
-                                <span>Participante</span>
-                                <span class="text-center">Palpite</span>
-                                <span class="text-right">Pontos</span>
-                            </div>
-
-                            <!-- Linhas -->
-                            @foreach ($bets as $bet)
-                                <div
-                                    class="grid grid-cols-3 px-6 py-4 items-center border-t border-(--color-border) hover:bg-(--color-accent) transition">
-
-                                    <!-- Nome -->
-                                    <span class="font-medium">
-                                        {{ $bet['name'] }}
-                                    </span>
-
-                                    <!-- Resultado -->
-                                    <span class="text-center font-semibold">
-                                        {{ $bet['prediction'] }}
-                                    </span>
-
-                                    <!-- Pontos -->
-                                    <span
-                                        class="text-right font-bold 
-                        {{ $bet['points'] > 0 ? 'text-green-400' : 'text-(--color-muted)' }}">
-                                        {{ $bet['points'] }}
-                                    </span>
-
+                                <div wire:ignore x-data="{ placed: @entangle('betIsPlaced') }">
+                                    <template x-if="placed">
+                                        <x-ui.button variant="outline" icon='trash' color="red" class="w-full mt-6"
+                                            wire:click="removeUserBet">
+                                            Remove Bet
+                                        </x-ui.button></template>
                                 </div>
-                            @endforeach
+                            @endif
+
+
 
                         </div>
+
                     </x-ui.tab.panel>
+
+                    @if ($match->utc_date->isPast())
+                        <x-ui.tab.panel name='results'>
+                            <div
+                                class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl overflow-hidden">
+
+                                <!-- Cabeçalho -->
+                                <div
+                                    class="grid grid-cols-3 px-6 py-3 bg-(--color-surface) text-sm font-semibold text-(--color-primary)">
+                                    <span>Participante</span>
+                                    <span class="text-center">Palpite</span>
+                                    <span class="text-right">Pontos</span>
+                                </div>
+
+                                <!-- Linhas -->
+                                @foreach ($match->validatedPlacedBets as $bet)
+                                    <div
+                                        class="grid grid-cols-3 px-6 py-4 items-center border-t border-(--color-border) hover:bg-(--color-accent) hover:text-(--color-surface) transition">
+
+                                        <!-- Nome -->
+                                        <span class="font-medium">
+                                            {{ $bet->user->name }}
+                                        </span>
+
+                                        <!-- Resultado -->
+                                        <span class="text-center font-semibold">
+                                            {{ $bet->result->home_score }}
+                                            x
+                                            {{ $bet->result->away_score }}
+                                        </span>
+
+                                        <!-- Pontos -->
+                                        <span class="text-right font-bold }}">
+                                            {{ $bet['points'] }}
+                                        </span>
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </x-ui.tab.panel>
+                    @endif
                     <x-ui.tab.panel>
                         <h3 class="text-lg font-semibold mb-2">Third Tab</h3>
                         <p>This is the third tab content.</p>

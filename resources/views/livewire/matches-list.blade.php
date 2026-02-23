@@ -35,6 +35,15 @@
                     <x-ui.select.option value="{{ $id }}">{{ $country }}</x-ui.select.option>
                 @endforeach
             </x-ui.select>
+
+            <x-ui.select placeholder="Select by bet status..." wire:model.live="selectedBetIsPlaced" clearable >
+                    <x-ui.select.option value="true">
+                        Bet Placed
+                    </x-ui.select.option>
+                    <x-ui.select.option value="false">
+                        No Bet
+                    </x-ui.select.option>
+            </x-ui.select>
         </div>
     </div>
 

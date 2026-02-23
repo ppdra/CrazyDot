@@ -37,4 +37,14 @@ class Game extends Model
     {
         return $this->hasOne(GameResult::class);
     }
+
+    public function bets()
+    {
+        return $this->hasMany(Bet::class, 'game_id');
+    }
+
+    public function validatedPlacedBets()
+    {
+        return $this->hasMany(Bet::class, 'game_id')->where('status', true);
+    }
 }
