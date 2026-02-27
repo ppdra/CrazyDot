@@ -176,7 +176,12 @@
                                 </div>
 
                                 <!-- Linhas -->
-                                @foreach ($match->validatedPlacedBets as $bet)
+                                @php
+                                    $ordered = $match->validatedPlacedBets
+                                        ->sortByDesc(fn($bet) => $bet->points->points ?? 0)
+                                        ->values();
+                                @endphp
+                                @foreach ($ordered as $bet)
                                     <div
                                         class="grid grid-cols-3 px-6 py-4 items-center border-t border-(--color-border) hover:bg-(--color-accent) hover:text-(--color-surface) transition">
 

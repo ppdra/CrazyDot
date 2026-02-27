@@ -9,4 +9,9 @@ class Ranking extends Model
 {
     /** @use HasFactory<\Database\Factories\RankingFactory> */
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
