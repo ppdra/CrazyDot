@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function ranking()
+    {
+        return $this->hasOne(Ranking::class, 'user_id');
+    }
 }

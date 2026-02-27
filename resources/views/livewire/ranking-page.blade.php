@@ -16,96 +16,9 @@
         </div>
     </div>
 
-    {{-- @php
-        // Mock de ranking (dados falsos)
-        $ranking = collect([
-            (object) [
-                'id' => 1,
-                'name' => 'João Silva',
-                'points' => 86,
-                'best_streak' => 7,
-                'best_streak_without_zero' => 12,
-                'accuracy' => 68,
-            ],
-            (object) [
-                'id' => 2,
-                'name' => 'Maria Souza',
-                'points' => 82,
-                'best_streak' => 6,
-                'best_streak_without_zero' => 10,
-                'accuracy' => 64,
-            ],
-            (object) [
-                'id' => 3,
-                'name' => 'Você',
-                'points' => 79,
-                'best_streak' => 5,
-                'best_streak_without_zero' => 9,
-                'accuracy' => 61,
-            ],
-            (object) [
-                'id' => 4,
-                'name' => 'Pedro Lima',
-                'points' => 73,
-                'best_streak' => 4,
-                'best_streak_without_zero' => 8,
-                'accuracy' => 57,
-            ],
-            (object) [
-                'id' => 5,
-                'name' => 'Ana Martins',
-                'points' => 69,
-                'best_streak' => 4,
-                'best_streak_without_zero' => 7,
-                'accuracy' => 55,
-            ],
-            (object) [
-                'id' => 6,
-                'name' => 'Rafa Costa',
-                'points' => 65,
-                'best_streak' => 3,
-                'best_streak_without_zero' => 6,
-                'accuracy' => 52,
-            ],
-            (object) [
-                'id' => 7,
-                'name' => 'Bruno Alves',
-                'points' => 61,
-                'best_streak' => 3,
-                'best_streak_without_zero' => 5,
-                'accuracy' => 49,
-            ],
-            (object) [
-                'id' => 8,
-                'name' => 'Camila Rocha',
-                'points' => 58,
-                'best_streak' => 2,
-                'best_streak_without_zero' => 4,
-                'accuracy' => 46,
-            ],
-            (object) [
-                'id' => 9,
-                'name' => 'Diego Nunes',
-                'points' => 54,
-                'best_streak' => 2,
-                'best_streak_without_zero' => 3,
-                'accuracy' => 43,
-            ],
-            (object) [
-                'id' => 10,
-                'name' => 'Lia Ferreira',
-                'points' => 50,
-                'best_streak' => 2,
-                'best_streak_without_zero' => 3,
-                'accuracy' => 41,
-            ],
-        ]);
 
-        // “Usuário atual” fake (pra destacar a linha)
-        $currentUserId = 3;
-    @endphp --}}
 
-    <div class="bg-(--color-background) border border-(--color-border) rounded-2xl overflow-hidden mt-4">
+    <div class="bg-(--color-background) border border-(--color-border) rounded-2xl overflow-visible mt-4">
 
         <!-- Header -->
         <div class="px-4 py-3 border-b border-(--color-border)]">
@@ -122,6 +35,7 @@
                 <thead
                     class="bg-[color-mix(in_srgb,var(--color-border)_20%,transparent) text-(--color-muted) text-xs uppercase tracking-wide">
                     <tr>
+                        <th class="px-4 py-3 text-left">#</th>
                         <th class="px-4 py-3 text-left">Posição</th>
                         <th class="px-4 py-3 text-left">Nome</th>
                         <th class="px-4 py-3 text-center">Pontos</th>
@@ -154,13 +68,25 @@
                         {{ $isMe ? 'bg-(--color-accent)' : '' }}
                     ">
                             <!-- posição -->
-                            <td class="px-4 py-3 font-semibold flex">
+                            <td class="px-4 py-3 font-semibold">
+                                <div class="relative group w-8 h-8">
+                                    <img src="{{ asset('images/position-' . $ranking->position . '.jpeg') }}"
+                                        alt="Avatar"
+                                        class="w-8 h-8 rounded-full object-cover
+                   transition-all duration-300 ease-in-out
+                   group-hover:scale-550
+                   group-hover:z-50
+                   relative">
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-3 font-semibold flex text-2xl">
                                 {{ $medal }}
 
                                 @if ($ranking->last_position < $ranking->position)
                                     <x-ui.icon name="chevron-double-down" class="text-red-500 size-3 font-bold" />
                                 @elseif ($ranking->last_position > $ranking->position)
-                                    <x-ui.icon name="chevron-double-up" class="text-green-500 size-3 font-bold" />  
+                                    <x-ui.icon name="chevron-double-up" class="text-green-500 size-3 font-bold" />
                                 @else
                                     <x-ui.icon name="minus" class="text-(--color-muted) size-3 font-bold" />
                                 @endif

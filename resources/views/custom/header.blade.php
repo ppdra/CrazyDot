@@ -1,35 +1,10 @@
 <x-ui.layout.header>
     <x-ui.sidebar.toggle class="md:hidden" />
-    <x-ui.navbar class="flex-1 hidden lg:flex">
-        <x-ui.navbar.item icon="home" label="Home" :href="'/demos/sidebar/home'" />
-        <x-ui.navbar.item icon="cog-6-tooth" label="Settings" badge="3" badge:color="orange" badge:variant="outline"
-            :href="'/demos/sidebar/settings'" />
-        <x-ui.dropdown>
-            <x-slot:button>
-                <x-ui.navbar.item icon="shopping-bag" icon:variant="min" label="Store" />
-            </x-slot:button>
-
-            <x-slot:menu>
-                <x-ui.dropdown.item icon="shopping-bag" :href="'/demos/sidebar/shop/products'">
-                    Products
-                </x-ui.dropdown.item>
-                <x-ui.dropdown.item icon="receipt-percent" :href="'/demos/sidebar/shop/orders'">
-                    Orders
-                </x-ui.dropdown.item>
-                <x-ui.dropdown.item icon="users" :href="'/demos/sidebar/shop/customers'">
-                    Customers
-                </x-ui.dropdown.item>
-                <x-ui.dropdown.item icon="ticket" :href="'/demos/sidebar/shop/discounts'">
-                    Discounts
-                </x-ui.dropdown.item>
-            </x-slot:menu>
-        </x-ui.dropdown>
-    </x-ui.navbar>
 
     <div class="flex ml-auto gap-x-3 items-center">
         <x-ui.dropdown position="bottom-end">
             <x-slot:button class="justify-center">
-                <x-ui.avatar size="sm" src="/mohamed.png" circle alt="Profile Picture" />
+                <x-ui.avatar size="sm" src="{{ asset('images/position-' . Auth::user()->ranking->position . '.jpeg') }}" circle alt="Profile Picture" />
             </x-slot:button>
 
             <x-slot:menu class="w-56">
