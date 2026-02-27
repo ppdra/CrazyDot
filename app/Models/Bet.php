@@ -25,4 +25,9 @@ class Bet extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function points()
+    {
+        return $this->hasOne(UserPoint::class, 'bet_id');
+    }   
 }

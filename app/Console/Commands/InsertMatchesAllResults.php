@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Models\Result;
 use App\Models\Team;
 use App\Services\Apis\FootballDataOrg\ApiService;
+use App\Services\Points\PointsCalculator;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -30,11 +31,15 @@ class InsertMatchesAllResults extends Command
      */
     public function handle()
     {
-        $now = Carbon::now()->subDay()->format('Y-m-d');
         $matches = ApiService::getMatches("?status=FINISHED");
+        $calculator = app(PointsCalculator::class);
 
         foreach ($matches as $match) {
             $game = Game::where('external_id', $match->externalId)->first();
+
+            if (!$game) {
+                continue;
+            }
 
             if (!$game->gameResult()->exists()) {
                 $result = Result::where('home_score', $match->homeScore)
@@ -53,6 +58,7 @@ class InsertMatchesAllResults extends Command
                 ]);
 
                 // calculate points for bets game.
+                $calculator->calculateMatchPoints($game);
             }
         }
     }

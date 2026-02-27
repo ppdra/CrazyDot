@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Game;
 use App\Models\Result;
-use App\Models\Team;
 use App\Services\Apis\FootballDataOrg\ApiService;
+use App\Services\Points\PointsCalculator;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -32,6 +32,7 @@ class InsertMatchesResults extends Command
     {
         $now = Carbon::now()->subDay()->format('Y-m-d');
         $matches = ApiService::getMatches("?status=FINISHED&dateFrom={$now}&dateTo={$now}");
+        $calculator = app(PointsCalculator::class);
 
         foreach ($matches as $match) {
             $game = Game::where('external_id', $match->externalId)->first();
@@ -53,6 +54,7 @@ class InsertMatchesResults extends Command
                 ]);
 
                 // calculate points for bets game.
+                $calculator->calculateMatchPoints($game);
             }
         }
     }

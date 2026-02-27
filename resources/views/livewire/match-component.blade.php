@@ -194,7 +194,7 @@
 
                                         <!-- Pontos -->
                                         <span class="text-right font-bold }}">
-                                            {{ $bet['points'] }}
+                                            {{ $bet->points->points }}
                                         </span>
 
                                     </div>

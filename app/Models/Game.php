@@ -47,4 +47,10 @@ class Game extends Model
     {
         return $this->hasMany(Bet::class, 'game_id')->where('status', true);
     }
+
+    public function userPoints()
+    {
+        return $this->hasMany(UserPoint::class, 'game_id');
+    }
+
 }
