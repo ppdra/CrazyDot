@@ -13,7 +13,7 @@
 
 <x-ui.sidebar>
     <x-slot:brand>
-        <x-ui.brand name="Sheaf UI" href="#">
+        {{-- <x-ui.brand name="Crazy Dot" href="#">
             <x-slot:logo>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="size-5">
                     <rect x="15" y="10" width="80" height="15" fill="currentColor" rx="5" ry="0" />
@@ -22,7 +22,10 @@
                     <rect x="15" y="55" width="10" height="30" fill="currentColor" />
                 </svg>
             </x-slot:logo>
-        </x-ui.brand>
+        </x-ui.brand> --}}
+        <x-ui.brand href="/"
+            logo="https://img.elo7.com.br/product/685x685/2B54CD8/big-poster-filme-joker-coringa-joaquin-phoenix-lo06-90x60-cm-filme-joker.jpg"
+            name="Crazy Dot" alt="Crazy Dot" logoClass="rounded-full size-12" />
     </x-slot:brand>
     <x-ui.navlist class="mt-5">
 
@@ -43,5 +46,5 @@
 
     <x-ui.sidebar.push />
 
-   
+
 </x-ui.sidebar>
