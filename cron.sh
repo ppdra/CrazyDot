@@ -15,7 +15,7 @@ cd "$PROJECT_PATH" || {
     exit 1
 }
 
-docker compose exec -T crazybolao-crazydot-app-1 php artisan "$COMMAND" > /dev/null 2>> "$LOG_FILE"
+docker exec -t crazybolao-crazydot-app-1 php artisan "$COMMAND" > /dev/null 2>> "$LOG_FILE"
 
 exit 0
 
