@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/account', AccountPage::class)->name('account');
 
+    Route::view('/how-to-play', 'how-to-play')->name('how-to-play');
+
 
     Route::get('/logout', LogoutController::class)
         ->name('logout');

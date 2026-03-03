@@ -1,7 +1,8 @@
 {
     "files": {
         "resources/js/utils.js": [
-            "dark-theme"
+            "dark-theme",
+            "modal"
         ],
         "resources/views/components/ui/tab/index.blade.php": [
             "tabs"
@@ -11,6 +12,9 @@
         ],
         "resources/views/components/ui/tab/panel.blade.php": [
             "tabs"
+        ],
+        "resources/js/globals/modals.js": [
+            "modal"
         ]
     },
     "helpers": {
