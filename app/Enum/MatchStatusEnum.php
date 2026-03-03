@@ -39,4 +39,14 @@ enum MatchStatusEnum: string
             self::SUSPENDED => 'purple-500',
         };
     }
+
+    public function translationKey(): string
+    {
+        return 'enums.match_status.' . $this->value;
+    }
+
+    public function label(): string
+    {
+        return __($this->translationKey());
+    }
 }

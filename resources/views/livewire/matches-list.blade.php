@@ -6,14 +6,14 @@
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2 mt-4 ">
 
-            <x-ui.select placeholder="Selecione os status..." wire:model.live="selectedStatus" multiple clearable>
+            <x-ui.select placeholder="{{ __('matches-list.placeholders.status') }}" wire:model.live="selectedStatus" multiple clearable>
                 @foreach ($statusOptsList as $opt)
-                    <x-ui.select.option value="{{ $opt->value }}">{{ $opt->name }}</x-ui.select.option>
+                    <x-ui.select.option value="{{ $opt->value }}">{{ $opt->label() }}</x-ui.select.option>
                 @endforeach
 
             </x-ui.select>
 
-            <x-ui.select placeholder="Selecione o grupo..." wire:model.live="selectedGroup" multiple clearable
+            <x-ui.select placeholder="{{ __('matches-list.placeholders.group') }}" wire:model.live="selectedGroup" multiple clearable
                 :disabled="$selectedStage !== '' && $selectedStage !== MatchStageEnum::GROUP_STAGE->value">
                 @foreach ($groupOptsList as $group)
                     <x-ui.select.option value="{{ $group }}">
@@ -22,55 +22,30 @@
                 @endforeach
             </x-ui.select>
 
-            <x-ui.select placeholder="Selecione a fase..." wire:model.live="selectedStage" clearable :disabled="!empty($selectedGroup)">
+            <x-ui.select placeholder="{{ __('matches-list.placeholders.stage') }}" wire:model.live="selectedStage" clearable :disabled="!empty($selectedGroup)">
                 @foreach ($stageOptsList as $stage)
                     <x-ui.select.option value="{{ $stage }}">
-                        {{ str_replace('_', ' ', $stage->value) }}
+                        {{ $stage->label() }}
                     </x-ui.select.option>
                 @endforeach
             </x-ui.select>
 
-            <x-ui.select placeholder="Selecione os países..." multiple searchable clearable wire:model.live="selectedCountry">
+            <x-ui.select placeholder="{{ __('matches-list.placeholders.countries') }}" multiple searchable clearable wire:model.live="selectedCountry">
                 @foreach ($countryOptsList as $id => $country)
                     <x-ui.select.option value="{{ $id }}">{{ $country }}</x-ui.select.option>
                 @endforeach
             </x-ui.select>
 
-            <x-ui.select placeholder="Selecione pelo status da aposta..." wire:model.live="selectedBetIsPlaced" clearable >
+            <x-ui.select placeholder="{{ __('matches-list.placeholders.bet_status') }}" wire:model.live="selectedBetIsPlaced" clearable >
                     <x-ui.select.option value="true">
-                        ✅ Aposta Realizada
+                        {{ __('matches-list.bet.placed') }}
                     </x-ui.select.option>
                     <x-ui.select.option value="false">
-                        ❌ Sem Aposta
+                        {{ __('matches-list.bet.not_placed') }}
                     </x-ui.select.option>
             </x-ui.select>
         </div>
     </div>
-
-    {{-- <div class="flex justify-between m-2">
-
-        <div>
-            @if (!$gamesList->onFirstPage())
-                <x-ui.link href="{{ $gamesList->previousPageUrl() }}">
-                    <div class="flex space-x-1">
-                        <x-ui.icon name="arrow-left" class="text-(--color-muted)" />
-                        <span>Previous Page</span>
-                    </div>
-                </x-ui.link>
-            @endif
-        </div>
-
-        @if (!$gamesList->onLastPage())
-            <div>
-                <x-ui.link href="{{ $gamesList->nextPageUrl() }}">
-                    <div class="flex space-x-1">
-                        <span>Next Page</span>
-                        <x-ui.icon name="arrow-right" class="text-(--color-muted)" />
-                    </div>
-                </x-ui.link>
-            </div>
-        @endif
-    </div> --}}
 
     <div class="mt-5 grid sm:grid-cols-1 md:grid-cols-2  gap-4 place-items-center h-full">
         @foreach ($gamesList as $match)
@@ -79,9 +54,5 @@
             </div>
         @endforeach
     </div>
-
-    {{-- <div class="mt-5">
-        {{ $gamesList->links() }}
-    </div> --}}
 
 </div>

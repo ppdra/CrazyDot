@@ -9,9 +9,9 @@
                             class="inline-grid h-8 w-8 place-items-center rounded-xl border border-(--color-card-border)">
                             🔴
                         </span>
-                        <h2 class="text-base font-bold text-(--color-primary)">Jogos ao vivo</h2>
+                        <h2 class="text-base font-bold text-(--color-primary)">{{ __('live.title') }}</h2>
                     </div>
-                    <p class="mt-1 text-sm text-(--color-muted)">Acompanhe o placar e o que a galera apostou</p>
+                    <p class="mt-1 text-sm text-(--color-muted)">{{ __('live.subtitle') }}</p>
                 </div>
             </div>
 
@@ -35,13 +35,13 @@
                                      color: color-mix(in oklab, var(--color-red-500) 85%, white 15%);">
                                 <span class="inline-block h-2 w-2 rounded-full"
                                     style="background: var(--color-red-500)"></span>
-                                AO VIVO
+                                {{ __('live.badge_live') }}
                             </span>
 
                             <div class="text-right text-xs text-(--color-muted)">
                                 <div>
                                     <span
-                                        class="font-semibold text-(--color-primary)">{{ $game->utc_date?->tz(session('tz')) }}</span>
+                                        class="font-semibold text-(--color-primary)">{{ \App\Support\Datetime::datetime($game->utc_date) }}</span>
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                         <!-- Recent -->
                         <div class="md:col-span-5 mt-5">
                             <p class="text-xs font-semibold text-(--color-muted) uppercase tracking-wide">
-                                Palpites
+                                {{ __('live.bets') }}
                             </p>
 
                             <div class="mt-3 space-y-2">
@@ -108,7 +108,7 @@
                                     </div>
                                 @empty
                                     <p class="text-xs text-(--color-muted)">
-                                        Nenhum palpite recente.
+                                        {{ __('live.no_recent_bets') }}
                                     </p>
                                 @endforelse
                             </div>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="mt-4 text-xs text-(--color-muted)">
-                Última atualização: {{ now()->tz(session('tz')) }}
+                {{ __('live.last_update', ['time' => \App\Support\Datetime::datetime(now())]) }}
             </div>
         </section>
     @endif

@@ -1,10 +1,10 @@
 @php
     $menu = [
-        ['label' => 'Home', 'icon' => 'home', 'route' => '/'],
-        ['label' => 'Partidas', 'icon' => 'globe-americas', 'route' => '/matches'],
-        ['label' => 'Ranking', 'icon' => 'trophy', 'route' => '/ranking'],
-        // ['label' => 'Estatísticas', 'icon' => 'chart-bar', 'route' => '/stats'],
-        ['label' => 'Regras', 'icon' => 'newspaper', 'route' => '/rules'],
+        ['label' => 'sidebar.home', 'icon' => 'home', 'route' => '/'],
+        ['label' => 'sidebar.matches', 'icon' => 'globe-americas', 'route' => '/matches'],
+        ['label' => 'sidebar.ranking', 'icon' => 'trophy', 'route' => '/ranking'],
+        // ['label' => 'sidebar.stats', 'icon' => 'chart-bar', 'route' => '/stats'],
+        ['label' => 'sidebar.rules', 'icon' => 'newspaper', 'route' => '/rules'],
     ];
 @endphp
 
@@ -21,11 +21,11 @@
 
         @foreach ($menu as $item)
             @if (!isset($item['subItems']))
-                <x-ui.navlist.item :label="$item['label']" :icon="$item['icon']" :href="$item['route']" />
+                <x-ui.navlist.item :label="__($item['label'])" :icon="$item['icon']" :href="$item['route']" />
             @else
-                <x-ui.navlist.group :label="$item['subItems']['label']" :collapsable="true">
+                <x-ui.navlist.group :label="__($item['subItems']['label'])" :collapsable="true">
                     @foreach ($item['subItems']['items'] as $subItem)
-                        <x-ui.navlist.item :label="$subItem['label']" :href="$subItem['route']" />
+                        <x-ui.navlist.item :label="__($subItem['label'])" :href="$subItem['route']" />
                     @endforeach
                 </x-ui.navlist.group>
             @endif

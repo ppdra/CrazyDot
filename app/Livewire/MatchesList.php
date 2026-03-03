@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Enum\MatchGroupEnum;
+use App\Enum\MatchStageEnum;
 use App\Enum\MatchStatusEnum;
 use App\Models\Game;
 use App\Models\Team;
@@ -29,8 +31,8 @@ class MatchesList extends Component
     public function mount()
     {
         $this->countryOptsList = $this->getCountryOptsList();
-        $this->groupOptsList = $this->getGroupOptsList();
-        $this->stageOptsList = $this->getStageOptsList();
+        $this->groupOptsList = MatchGroupEnum::cases();
+        $this->stageOptsList = MatchStageEnum::cases();
         $this->statusOptsList = MatchStatusEnum::cases();
 
         $this->selectedStatus = [MatchStatusEnum::SCHEDULED->value];
@@ -94,29 +96,6 @@ class MatchesList extends Component
             ->all();
     }
 
-    // todo refactor to use cache
-    public function getGroupOptsList(): array
-    {
-        return Game::query()
-            ->whereNotNull('group_name')
-            ->select('group_name')
-            ->distinct()
-            ->orderBy('group_name')
-            ->pluck('group_name')
-            ->all();
-    }
-
-    // todo refactor to use cache
-    public function getStageOptsList(): array
-    {
-        return Game::query()
-            ->whereNotNull('stage')
-            ->select('stage')
-            ->distinct()
-            ->orderBy('stage')
-            ->pluck('stage')
-            ->all();
-    }
 
 
     public function render()

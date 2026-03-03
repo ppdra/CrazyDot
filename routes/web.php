@@ -13,6 +13,14 @@ Route::group(['namespace' => ''], function () {
     require __DIR__ . '/auth.php';
 });
 
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['pt_BR', 'en'])) {
+        session(['lang' => $locale]);
+    }
+
+    return back();
+})->name('lang.switch');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/', HomePage::class)->name('home');
@@ -26,6 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', AccountPage::class)->name('account');
 
 
-     Route::get('/logout', LogoutController::class)
+    Route::get('/logout', LogoutController::class)
         ->name('logout');
 });

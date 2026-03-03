@@ -16,7 +16,7 @@
 
                 <span
                     class="text-xs sm:text-sm text-(--color-muted)] text-right leading-tight truncate max-w-[60%] sm:max-w-none">
-                    {{ $match->utc_date->tz(session('tz')) }}
+                    {{ \App\Support\Datetime::datetime($match->utc_date) }}
                 </span>
             </div>
         </div>
@@ -26,9 +26,8 @@
             <div>
                 @if ($match->stage === MatchStageEnum::GROUP_STAGE)
                     <x-ui.badge size='sm'>{{ $match->group_name->label() }}</x-ui.badge>
-                    <x-ui.badge size='sm'>Matchday {{ $match->matchday }}</x-ui.badge>
                 @else
-                    <x-ui.badge size='sm'>{{ str_replace('_', ' ', $match->stage->name ?? '') }}</x-ui.badge>
+                    <x-ui.badge size='sm'>{{ $match->stage?->label() ?? '' }}</x-ui.badge>
                 @endif
             </div>
 
@@ -54,11 +53,11 @@
                         <div class="flex flex-col items-center gap-1 sm:gap-2 min-w-0">
                             <img src="{{ $match->homeTeam?->logo_url ?? 'https://media.istockphoto.com/id/2212375124/vector/tba-to-be-announced-sign-sticker-icon-symbol-vector.jpg?s=612x612&w=0&k=20&c=2-s3i4olILrA7mcLTFrpdPGSXfSUFDYLD1A8NKhnmQI=' }}"
                                 class="w-10 h-10 sm:w-14 sm:h-14 object-contain"
-                                alt="{{ $match->homeTeam?->name ?? 'TBA' }}" />
+                                alt="{{ $match->homeTeam?->name ?? __('match-component.tba') }}" />
 
                             <span class="font-semibold text-center truncate max-w-full text-sm sm:text-lg">
-                                <span class="sm:hidden">{{ $match->homeTeam?->slug ?? 'TBA' }}</span>
-                                <span class="hidden sm:inline">{{ $match->homeTeam?->name ?? 'TBA' }}</span>
+                                <span class="sm:hidden">{{ $match->homeTeam?->slug ?? __('match-component.tba') }}</span>
+                                <span class="hidden sm:inline">{{ $match->homeTeam?->name ?? __('match-component.tba') }}</span>
                             </span>
                         </div>
 
@@ -73,11 +72,11 @@
                         <div class="flex flex-col items-center gap-1 sm:gap-2 min-w-0">
                             <img src="{{ $match->awayTeam?->logo_url ?? 'https://media.istockphoto.com/id/2212375124/vector/tba-to-be-announced-sign-sticker-icon-symbol-vector.jpg?s=612x612&w=0&k=20&c=2-s3i4olILrA7mcLTFrpdPGSXfSUFDYLD1A8NKhnmQI=' }}"
                                 class="w-10 h-10 sm:w-14 sm:h-14 object-contain"
-                                alt="{{ $match->awayTeam?->name ?? 'TBA' }}" />
+                                alt="{{ $match->awayTeam?->name ?? __('match-component.tba') }}" />
 
                             <span class="font-semibold text-center truncate max-w-full text-sm sm:text-lg">
-                                <span class="sm:hidden">{{ $match->awayTeam?->slug ?? 'TBA' }}</span>
-                                <span class="hidden sm:inline">{{ $match->awayTeam?->name ?? 'TBA' }}</span>
+                                <span class="sm:hidden">{{ $match->awayTeam?->slug ?? __('match-component.tba') }}</span>
+                                <span class="hidden sm:inline">{{ $match->awayTeam?->name ?? __('match-component.tba') }}</span>
                             </span>
                         </div>
 
@@ -144,14 +143,14 @@
                             @if ($match->utc_date->isFuture())
                                 <x-ui.button variant="outline" icon='bookmark-square' color="blue" class="w-full mt-6"
                                     wire:click="saveUserBet">
-                                    Save
+                                    {{ __('match-component.actions.save') }}
                                 </x-ui.button>
 
                                 <div wire:ignore x-data="{ placed: @entangle('betIsPlaced') }">
                                     <template x-if="placed">
                                         <x-ui.button variant="outline" icon='trash' color="red" class="w-full mt-6"
                                             wire:click="removeUserBet">
-                                            Remove Bet
+                                            {{ __('match-component.actions.remove_bet') }}
                                         </x-ui.button></template>
                                 </div>
                             @endif

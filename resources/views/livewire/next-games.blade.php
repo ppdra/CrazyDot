@@ -7,15 +7,15 @@
                     <span class="inline-grid h-8 w-8 place-items-center rounded-xl border border-(--color-card-border)">
                         ⚽
                     </span>
-                    <h2 class="text-base font-bold text-(--color-primary)">Próximos Jogos</h2>
+                    <h2 class="text-base font-bold text-(--color-primary)">{{ __('next-games.title') }}</h2>
                 </div>
-                <p class="mt-1 text-sm text-(--color-muted)">Aposte e acompanhe as próximas partidas</p>
+                <p class="mt-1 text-sm text-(--color-muted)">{{ __('next-games.subtitle') }}</p>
             </div>
 
             <a href="{{ route('matches') }}"
                 class="inline-flex items-center justify-center rounded-xl border border-(--color-card-border)
                   bg-transparent px-4 py-2 text-sm font-semibold text-(--color-primary) transition hover:opacity-90">
-                Ver agenda
+                {{ __('next-games.see_schedule') }}
             </a>
         </div>
 
@@ -33,7 +33,9 @@
                     <!-- Top row: league + time + pill -->
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex items-center gap-2 text-xs text-(--color-muted)">
-                            <span>{{ $game->utc_date->tz(session('tz')) }}</span>
+                           
+                            <span>{{ \App\Support\Datetime::datetime($game->utc_date) }}</span>
+
 
                         </div>
                     </div>
@@ -77,11 +79,10 @@
                                 style="background: color-mix(in oklab, var(--color-success) 12%, transparent);
                                     border-color: color-mix(in oklab, var(--color-success) 35%, transparent);
                                     color: color-mix(in oklab, var(--color-success) 85%, white 15%);">
-                                ✅ Palpite realizado
+                                ✅ {{ __('next-games.bet_done') }}
                             </span>
                             <p class="text-xs text-(--color-muted)">
-                                Seu Palpite: {{ $isAuthUserBeted->result->home_score }} x
-                                {{ $isAuthUserBeted->result->away_score }}
+                                    {{ __('next-games.your_bet', ['home' => $isAuthUserBeted->result->home_score, 'away' => $isAuthUserBeted->result->away_score]) }}
                             </p>
                         @else
                             <span
@@ -89,7 +90,7 @@
                                 style="background: color-mix(in oklab, var(--color-warning) 12%, transparent);
                                     border-color: color-mix(in oklab, var(--color-warning) 35%, transparent);
                                     color: color-mix(in oklab, var(--color-warning) 85%, white 15%);">
-                                ⚠️ Sem palpite para partida
+                                ⚠️ {{ __('next-games.no_bet') }}
                             </span>
                         @endif
 
@@ -105,10 +106,10 @@
 
                         <div>
                             <p class="text-sm font-semibold text-(--color-primary)">
-                                Nenhum jogo disponível
+                                {{ __('next-games.empty.title') }}
                             </p>
                             <p class="mt-1 text-xs text-(--color-muted)">
-                                Ainda não há partidas programadas.
+                                {{ __('next-games.empty.subtitle') }}   
                             </p>
                         </div>
                     </div>
@@ -120,12 +121,12 @@
         <!-- Footer -->
         <div class="mt-4 flex items-center justify-between gap-3">
             <p class="text-xs text-(--color-muted)">
-                Dica: palpites podem fechar automaticamente poucos minutos antes do jogo.
+                {{ __('next-games.tip') }}
             </p>
         </div>
         <div>
             <p class="text-xs text-(--color-muted)">
-                Última Atualização: {{ now()->tz(session('tz')) }}
+                {{ __('next-games.last_update', ['time' => \App\Support\Datetime::datetime(now())]) }}
 
             </p>
         </div>

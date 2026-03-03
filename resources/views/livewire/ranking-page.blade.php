@@ -6,8 +6,8 @@
         <div class="px-4 py-4 border-b border-(--color-card-border)">
             <div class="flex items-center justify-between gap-3">
                 <div>
-                    <h2 class="text-base font-bold text-(--color-primary)">Ranking Geral</h2>
-                    <p class="mt-1 text-sm text-(--color-muted)">Classificação atual do bolão</p>
+                    <h2 class="text-base font-bold text-(--color-primary)">{{ __('ranking-page.title') }}</h2>
+                    <p class="mt-1 text-sm text-(--color-muted)">{{ __('ranking-page.subtitle') }}</p>
                 </div>
 
                
@@ -19,13 +19,13 @@
                 <!-- Head -->
                 <thead class="text-(--color-muted) text-xs uppercase tracking-wide">
                     <tr style="background: color-mix(in oklab, var(--color-border) 18%, transparent);">
-                        <th class="px-4 py-3 text-left">#</th>
-                        <th class="px-4 py-3 text-left">Posição</th>
-                        <th class="px-4 py-3 text-left">Nome</th>
-                        <th class="px-4 py-3 text-center">Pontos</th>
-                        <th class="px-4 py-3 text-center">Melhor seq 7 pts</th>
-                        <th class="px-4 py-3 text-center">Melhor seq. 0 pts</th>
-                        <th class="px-4 py-3 text-center">Aproveitamento</th>
+                        <th class="px-4 py-3 text-left">{{ __('ranking-page.table.index') }}</th>
+                        <th class="px-4 py-3 text-left">{{ __('ranking-page.table.position') }}</th>
+                        <th class="px-4 py-3 text-left">{{ __('ranking-page.table.name') }}</th>
+                        <th class="px-4 py-3 text-center">{{ __('ranking-page.table.points') }}</th>
+                        <th class="px-4 py-3 text-center">{{ __('ranking-page.table.best_streak_full') }}</th>
+                        <th class="px-4 py-3 text-center">{{ __('ranking-page.table.best_streak_zero') }}</th>
+                        <th class="px-4 py-3 text-center">{{ __('ranking-page.table.accuracy') }}</th>
                     </tr>
                 </thead>
 
@@ -40,7 +40,6 @@
                                 0 => '🥇',
                                 1 => '🥈',
                                 2 => '🥉',
-                                4 => 'Petista Do Job',
                                 default => (string) ($index + 1),
                             };
                         @endphp
@@ -79,7 +78,7 @@
                                         style="border-color: color-mix(in oklab, var(--color-btn) 35%, transparent);
                                              background: color-mix(in oklab, var(--color-btn) 12%, transparent);
                                              color: color-mix(in oklab, var(--color-btn) 85%, white 15%);">
-                                        Você
+                                        {{ __('ranking-page.table.you') }}
                                     </span>
                                 @endif
                             </td>

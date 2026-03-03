@@ -7,15 +7,15 @@
                     class="inline-grid h-8 w-8 place-items-center rounded-xl border border-(--color-card-border) bg-transparent">
                     🏆
                 </span>
-                <h2 class="text-base font-bold text-(--color-primary)">Ranking Geral</h2>
+                <h2 class="text-base font-bold text-(--color-primary)">{{ __('ranking.title') }}</h2>
             </div>
-            <p class="mt-1 text-sm text-(--color-muted)">Top 3 da classificação atual</p>
+            <p class="mt-1 text-sm text-(--color-muted)">{{ __('ranking.subtitle') }}</p>
         </div>
 
         <a href="{{ route('ranking') }}"
             class="inline-flex items-center justify-center rounded-xl border border-(--color-card-border)
                       bg-transparent px-4 py-2 text-sm font-semibold text-(--color-primary) transition hover:opacity-90">
-            Ver completo
+            {{ __('ranking.see_full') }}
         </a>
     </div>
 
@@ -24,9 +24,9 @@
         <!-- Head row -->
         <div
             class="grid grid-cols-12 gap-3 bg-transparent px-4 py-3 text-[11px] font-semibold uppercase tracking-wide text-(--color-muted)">
-            <div class="col-span-1">#</div>
-            <div class="col-span-6">Usuário</div>
-            <div class="col-span-3 text-right">Pontos</div>
+            <div class="col-span-1">{{ __('ranking.table.position') }}</div>
+            <div class="col-span-6">{{ __('ranking.table.user') }}</div>
+            <div class="col-span-3 text-right">{{ __('ranking.table.points') }}</div>
         </div>
 
         <div class="divide-y divide-(--color-card-border)">
@@ -75,7 +75,7 @@
                         <p class="text-sm font-bold text-(--color-primary)">
                             {{ number_format($row->points, 0, ',', '.') }}
                         </p>
-                        <p class="text-xs text-(--color-muted)">pts</p>
+                        <p class="text-xs text-(--color-muted)">{{ __('ranking.table.pts') }}</p>
                     </div>
 
 
@@ -90,10 +90,10 @@
 
                         <div>
                             <p class="text-sm font-semibold text-(--color-primary)">
-                                Ranking ainda não disponível
+                                {{ __('ranking.empty.title') }}
                             </p>
                             <p class="mt-1 text-xs text-(--color-muted)">
-                                Ainda não há dados suficientes para gerar a classificação.
+                                {{ __('ranking.empty.subtitle') }}
                             </p>
                         </div>
 
@@ -107,12 +107,12 @@
     <!-- Footer action -->
     <div class="mt-4 flex items-center justify-between gap-3">
         <p class="text-xs text-(--color-muted)">
-            Atualiza automaticamente conforme as partidas são validadas.
+            {{ __('ranking.auto_update') }}
         </p>
     </div>
     <div>
         <p class="text-xs text-(--color-muted)">
-            Última Atualização: {{ now()->tz(session('tz')) }}
+            {{ __('ranking.last_update', ['time' => \App\Support\Datetime::datetime(now())]) }}
         </p>
     </div>
 </section>

@@ -17,8 +17,13 @@ enum MatchGroupEnum: string
     case GROUP_K = 'GROUP_K';
     case GROUP_L = 'GROUP_L';
 
+    public function translationKey(): string
+    {
+        return 'enums.match_group.' . $this->value;
+    }
+
     public function label(): string
     {
-        return str_replace('_', ' ', $this->value);
+        return __($this->translationKey());
     }
 }

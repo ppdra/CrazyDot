@@ -28,15 +28,15 @@
                 <span class="inline-grid h-8 w-8 place-items-center rounded-xl border border-(--color-card-border)">
                     🧾
                 </span>
-                <h2 class="text-base font-bold text-(--color-primary)">Últimos Resultados</h2>
+                <h2 class="text-base font-bold text-(--color-primary)">{{ __('last-results.title') }}</h2>
             </div>
-            <p class="mt-1 text-sm text-(--color-muted)">Partidas validadas recentemente</p>
+            <p class="mt-1 text-sm text-(--color-muted)">{{ __('last-results.subtitle') }}</p>
         </div>
 
         <a href="#"
             class="inline-flex items-center justify-center rounded-xl border border-(--color-card-border)
                   bg-transparent px-4 py-2 text-sm font-semibold text-(--color-primary) transition hover:opacity-90">
-            Ver histórico
+            {{ __('last-results.see_history') }}
         </a>
     </div>
 
@@ -70,12 +70,12 @@
 
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs text-(--color-muted)">
                             <span class="rounded-lg border border-(--color-card-border) px-2 py-1">
-                                Palpite: <span
+                                {{ __('last-results.bet') }}: <span
                                     class="text-(--color-primary) font-semibold">{{ $r->bet->result->home_score }}–{{ $r->bet->result->away_score }}</span>
                             </span>
 
                             <span class="rounded-lg border border-(--color-card-border) px-2 py-1">
-                                Final: <span
+                                {{ __('last-results.final') }}: <span
                                     class="text-(--color-primary) font-semibold">{{ $r->gameResult->result->home_score }}–{{ $r->gameResult->result->away_score }}</span>
                             </span>
                         </div>
@@ -94,10 +94,10 @@
 
                     <div>
                         <p class="text-sm font-semibold text-(--color-primary)">
-                            Nenhum resultado ainda
+                            {{ __('last-results.empty.title') }}
                         </p>
                         <p class="mt-1 text-xs text-(--color-muted)">
-                            As partidas validadas vão aparecer aqui assim que houver pontuação.
+                            {{ __('last-results.empty.subtitle') }}
                         </p>
                     </div>
                 </div>
@@ -108,13 +108,13 @@
     <!-- Footer -->
     <div class="mt-4 flex items-center justify-between gap-3">
         <p class="text-xs text-(--color-muted)">
-            Mostrando os resultados mais recentes.
+            {{ __('last-results.footer') }}
         </p>
 
     </div>
     <div>
         <p class="text-xs text-(--color-muted)">
-            Última Atualização: {{ now()->tz(session('tz')) }}
+            {{ __('last-results.last_update', ['time' => \App\Support\Datetime::datetime(now())]) }}
 
         </p>
     </div>
