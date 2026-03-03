@@ -107,7 +107,7 @@
 
                                     </x-ui.button>
 
-                                    <x-ui.input class="w-16 text-center" wire:model="homeScore" type="text"
+                                    <x-ui.input class="text-center" wire:model="homeScore" type="text"
                                         min="0" disabled>
                                     </x-ui.input>
 
@@ -126,7 +126,7 @@
                                         wire:click="decrementScore('away')">
                                     </x-ui.button>
 
-                                    <x-ui.input class="w-16 text-center" wire:model="awayScore" type="text"
+                                    <x-ui.input class="text-center" wire:model="awayScore" type="text"
                                         min="0" disabled>
 
                                     </x-ui.input>
