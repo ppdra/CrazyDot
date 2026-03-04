@@ -92,27 +92,7 @@
                             </p>
 
                             <div class="mt-3 space-y-2">
-                                @forelse($game->validatedPlacedBets as $b)
-                                    <div class="flex items-center justify-between gap-2">
-                                        <p class="truncate text-sm font-semibold text-(--color-primary)">
-                                            {{ $b->user->name }}
-                                        </p>
-
-                                        <span
-                                            class="inline-flex items-center rounded-xl border px-3 py-1 text-xs font-semibold"
-                                            style="border-color: color-mix(in oklab, var(--color-border) 45%, transparent);
-                                                        background: color-mix(in oklab, var(--color-border) 14%, transparent);
-                                                        color: var(--color-primary);">
-                                            {{ $b->result->home_score }}–{{ $b->result->away_score }}
-                                        </span>
-
-                                        <livewire:emoji-picker :gameId="$game->id" :betId="$b->id" />
-                                    </div>
-                                @empty
-                                    <p class="text-xs text-(--color-muted)">
-                                        {{ __('live.no_recent_bets') }}
-                                    </p>
-                                @endforelse
+                                <livewire:game-bets-view :gameId="$game->id" />
                             </div>
                         </div>
                     </div>

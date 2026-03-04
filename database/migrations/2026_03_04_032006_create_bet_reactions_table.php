@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(Bet::class)->constrained()->onDelete('cascade');
             $table->unsignedTinyInteger('emoji_id');
             $table->timestamps();
+
+            $table->unique(['bet_id', 'user_id', 'emoji_id']);
         });
     }
 

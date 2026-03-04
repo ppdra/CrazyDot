@@ -167,6 +167,7 @@
 
                     @if ($match->utc_date->isPast())
                         <x-ui.tab.panel name="results">
+
                             <div
                                 class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl overflow-hidden">
 

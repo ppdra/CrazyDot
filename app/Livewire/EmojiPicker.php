@@ -41,19 +41,16 @@ class EmojiPicker extends Component
             'emoji_id' => $emojiId,
         ])->first();
 
-        if ($reaction) {
-            $reaction->delete();
-            $this->userReactions = $this->loadUserReactions();
-            return;
-        }
 
-        BetReaction::create([
+        $reaction ? $reaction->delete() : BetReaction::create([
             'bet_id'   => $this->betId,
             'user_id'  => $userId,
             'emoji_id' => $emojiId,
         ]);
 
         $this->userReactions = $this->loadUserReactions();
+
+        $this->dispatch("updateBetReactions.{$this->gameId}");
     }
 
     public function render()
