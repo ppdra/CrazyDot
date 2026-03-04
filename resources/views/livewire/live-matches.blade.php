@@ -51,11 +51,11 @@
                         <div class="mt-4 grid grid-cols-12 items-center gap-3">
                             <!-- Home -->
                             <div class="col-span-5 flex min-w-0 items-center gap-3">
-                                <img src="{{ $game->homeTeam->logo_url }}" alt="{{ $game->homeTeam->name }}"
+                                <img src="{{ $game->homeTeam->logo_url ?? '' }}" alt="{{ $game->homeTeam->name ?? '' }}"
                                     class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none';" />
                                 <div class="min-w-0">
                                     <p class="truncate text-sm font-semibold text-(--color-primary)">
-                                        {{ $game->homeTeam->slug }}
+                                        {{ $game->homeTeam->slug ?? '' }}
                                     </p>
                                 </div>
                             </div>
@@ -72,10 +72,10 @@
                             <div class="col-span-5 flex min-w-0 items-center justify-end gap-3 text-right">
                                 <div class="min-w-0">
                                     <p class="truncate text-sm font-semibold text-(--color-primary)">
-                                        {{ $game->awayTeam->slug }}
+                                        {{ $game->awayTeam->slug ?? '' }}
                                     </p>
                                 </div>
-                                <img src="{{ $game->awayTeam->logo_url }}" alt="{{ $game->awayTeam->name }}"
+                                <img src="{{ $game->awayTeam->logo_url ?? '' }}" alt="{{ $game->awayTeam->name ?? '' }}"
                                     class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none';" />
                             </div>
                         </div>
@@ -101,10 +101,12 @@
                                         <span
                                             class="inline-flex items-center rounded-xl border px-3 py-1 text-xs font-semibold"
                                             style="border-color: color-mix(in oklab, var(--color-border) 45%, transparent);
-                                                     background: color-mix(in oklab, var(--color-border) 14%, transparent);
-                                                     color: var(--color-primary);">
+                                                        background: color-mix(in oklab, var(--color-border) 14%, transparent);
+                                                        color: var(--color-primary);">
                                             {{ $b->result->home_score }}–{{ $b->result->away_score }}
                                         </span>
+
+                                        <livewire:emoji-picker :gameId="$game->id" :betId="$b->id" />
                                     </div>
                                 @empty
                                     <p class="text-xs text-(--color-muted)">

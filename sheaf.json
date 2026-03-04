@@ -53,7 +53,7 @@
             "installationTime": 1771687564
         },
         "popup": {
-            "installationTime": 1771687564
+            "installationTime": 1772592157
         },
         "text": {
             "installationTime": 1771687568
@@ -72,6 +72,9 @@
         },
         "modal": {
             "installationTime": 1772508868
+        },
+        "popover": {
+            "installationTime": 1772592157
         }
     }
 }

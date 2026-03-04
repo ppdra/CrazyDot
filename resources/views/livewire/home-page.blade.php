@@ -22,7 +22,8 @@
                 <!-- Left: Welcome -->
                 <div class="md:col-span-7">
                     <p class="text-sm text-(--color-muted)">
-                        Olá, <span class="text-(--color-primary) font-semibold capitalize">{{ Auth::user()->name }}</span> 👋
+                        Olá, <span
+                            class="text-(--color-primary) font-semibold capitalize">{{ Auth::user()->name }}</span> 👋
                     </p>
 
                     <h1 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight text-(--color-primary)">
@@ -142,7 +143,7 @@
     <div class="mt-4">
         <livewire:live-matches />
     </div>
-        
+
 
 
     <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-2 mt-4 ">
