@@ -4,7 +4,7 @@
         ['label' => 'sidebar.matches', 'icon' => 'globe-americas', 'route' => '/matches'],
         ['label' => 'sidebar.ranking', 'icon' => 'trophy', 'route' => '/ranking'],
         // ['label' => 'sidebar.stats', 'icon' => 'chart-bar', 'route' => '/stats'],
-        ['label' => 'sidebar.rules', 'icon' => 'newspaper', 'route' => '/how-to-play'],
+        ['label' => 'sidebar.rules', 'icon' => 'book-open', 'route' => '/how-to-play'],
     ];
 @endphp
 

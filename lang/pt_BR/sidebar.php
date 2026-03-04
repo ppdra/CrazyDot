@@ -4,5 +4,5 @@ return [
     'home' => 'Início',
     'matches' => 'Partidas',
     'ranking' => 'Ranking',
-    'rules' => 'Regras',
+    'rules' => 'Como Jogar',
 ];
