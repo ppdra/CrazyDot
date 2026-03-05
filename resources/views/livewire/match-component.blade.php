@@ -158,7 +158,7 @@
                                             {{ __('match-component.actions.remove_bet') }}
                                         </x-ui.button></template>
                                 </div>
-                            @endif
+                            {{-- @endif --}}
 
 
 
@@ -221,7 +221,7 @@
 
                             </div>
                         </x-ui.tab.panel> --}}
-                    {{-- @endif --}}
+                    @endif
 
                 </x-ui.tabs>
             </x-ui.accordion.content>
