@@ -2,6 +2,7 @@
 
 use App\Enum\MatchGroupEnum;
 use App\Enum\MatchStageEnum;
+use App\Enum\MatchStatusEnum;
 use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,11 +20,11 @@ return new class extends Migration
             $table->integer('external_id')->unique();
             $table->foreignIdFor(Team::class, 'home_id')->cascadeOnDelete()->nullable();
             $table->foreignIdFor(Team::class, 'away_id')->cascadeOnDelete()->nullable();
-            $table->enum('group_name', MatchGroupEnum::cases())->nullable();
             $table->string('matchday')->nullable();
+            $table->enum('group_name', MatchGroupEnum::cases())->nullable();
             $table->enum('stage', MatchStageEnum::cases())->nullable();
+            $table->enum('status', MatchStatusEnum::cases())->nullable();
             $table->timestamp('utc_date')->nullable();
-            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

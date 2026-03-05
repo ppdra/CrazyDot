@@ -11,6 +11,8 @@ class EmojiPicker extends Component
     public int $selectedEmojiId = 0;
     public int $gameId;
     public int $betId;
+    public int $homeScore;
+    public int $awayScore;
 
     public array $userReactions;
 

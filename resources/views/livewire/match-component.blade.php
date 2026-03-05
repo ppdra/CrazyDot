@@ -1,5 +1,6 @@
 @use('App\Enum\MatchStatusEnum')
 @use('App\Enum\MatchStageEnum')
+@use('App\Enum\ReactionEmoji')
 
 <div class="rounded-2xl backdrop-blur-md border border-(--color-border) bg-(--color-background)">
 
@@ -168,91 +169,11 @@
                     @if ($match->utc_date->isPast())
                         <x-ui.tab.panel name="results">
 
-                            <div
-                                class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl overflow-hidden">
-
-                                <div
-                                    class="grid grid-cols-4 px-6 py-3 bg-(--color-surface) text-xs font-semibold uppercase tracking-wide text-(--color-muted)">
-                                    <span>Participante</span>
-                                    <span class="text-center">Palpite</span>
-                                    <span class="text-right">Pontos</span>
-                                    <span class="text-right">...</span>
-                                </div>
-
-                                @php
-                                    $ordered = $match->validatedPlacedBets
-                                        ->sortByDesc(fn($bet) => $bet->points->points ?? 0)
-                                        ->values();
-                                @endphp
-
-                                @forelse ($ordered as $index => $bet)
-                                    @php
-                                        $points = $bet->points->points ?? 0;
-                                    @endphp
-
-                                    <div
-                                        class="grid grid-cols-4 px-6 py-4 items-center border-t border-(--color-border)
-                                            hover:bg-(--color-surface)/50 transition">
-
-                                        <div class="flex items-center gap-3">
-                                            <span class="font-semibold text-(--color-primary)">
-                                                {{ $bet->user->name }}
-                                            </span>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <span
-                                                class="inline-flex items-center gap-2 px-3 py-1 rounded-xl
-                                                        bg-(--color-surface) border border-(--color-border)/30
-                                                        font-semibold text-(--color-primary)">
-
-                                                {{ $bet->result->home_score }}
-                                                <span class="text-(--color-muted)">x</span>
-                                                {{ $bet->result->away_score }}
-
-                                            </span>
-                                        </div>
-
-                                        <div class="text-right">
-                                            <span
-                                                class="inline-flex items-center justify-center px-3 py-1 rounded-xl
-                                                    font-bold
-                                                    {{ $points > 0 ? 'bg-(--color-primary)/10 text-(--color-primary)' : 'bg-(--color-surface) text-(--color-muted)' }}">
-                                                {{ $points }}
-
-                                            </span>
-                                        </div>
-
-                                        <div class="text-right">
-                                            <x-ui.popover>
-                                                <x-ui.popover.trigger>
-                                                    <x-ui.button icon="plus-circle" variant="ghost"
-                                                        size="sm">
-                                                        Reagir
-                                                    </x-ui.button>
-                                                </x-ui.popover.trigger>
-                                                <x-ui.popover.overlay position="top" :offset="8">
-                                                    <div class="p-3 space-4">
-                                                        @foreach (ReactionEmoji::picker() as $emoji)
-                                                            <button class="text-2xl">
-                                                                {{ $emoji['emoji'] }}
-                                                            </button>
-                                                            
-                                                        @endforeach
-                                                    </div>
-                                                </x-ui.popover.overlay>
-                                            </x-ui.popover>
-                                        </div>
+                            <div class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl ">
 
 
-                                    </div>
+                                <livewire:game-bets-view :gameId="$match->id" :key="'game-bets-' . $match->id" />
 
-                                @empty
-
-                                    <div class="px-6 py-10 text-center text-sm text-(--color-muted)">
-                                        Nenhum palpite registrado ainda.
-                                    </div>
-                                @endforelse
 
                             </div>
                         </x-ui.tab.panel>
@@ -301,10 +222,7 @@
                             </div>
                         </x-ui.tab.panel> --}}
                     @endif
-                    <x-ui.tab.panel>
-                        <h3 class="text-lg font-semibold mb-2">Third Tab</h3>
-                        <p>This is the third tab content.</p>
-                    </x-ui.tab.panel>
+
                 </x-ui.tabs>
             </x-ui.accordion.content>
         </x-ui.accordion.item>

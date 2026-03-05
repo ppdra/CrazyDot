@@ -17,7 +17,11 @@ class BetFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'game_id' => null,
+            'result_id' => null,
+            'status' => true,
+            'obs' => null,
         ];
     }
 }

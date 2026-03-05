@@ -14,6 +14,12 @@ enum ReactionEmoji: int
     case CLOWN     = 8;
     case BOOK       = 9;
     case MONKEY     = 10;
+    case BALL       = 11;
+    case ZERO       = 12;
+    case TWO       = 13;
+    case THREE     = 14;
+    case FIVE      = 15;
+    case SEVEN      = 16;
 
     public function emoji(): string
     {
@@ -27,7 +33,13 @@ enum ReactionEmoji: int
             self::EYES      => '👀',
             self::CLOWN     => '🤡',
             self::BOOK      => '📚',
-            self::MONKEY    => '🐒',
+            self::MONKEY    => '🦧',
+            self::BALL      => '⚽',
+            self::ZERO      => '0️⃣',
+            self::TWO       => '2️⃣',
+            self::THREE     => '3️⃣',
+            self::FIVE      => '5️⃣',
+            self::SEVEN     => '7️⃣',
         };
     }
 

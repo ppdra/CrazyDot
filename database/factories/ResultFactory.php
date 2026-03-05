@@ -17,7 +17,8 @@ class ResultFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'home_score' => fake()->numberBetween(0, 5),
+            'away_score' => fake()->numberBetween(0, 5),
         ];
     }
 }
