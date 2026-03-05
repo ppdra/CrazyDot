@@ -1,6 +1,6 @@
 @use('App\Enum\ReactionEmoji')
 
-<div class="rounded-2xl border border-(--color-card-border) bg-(--color-background)">
+<div class="border border-(--color-card-border) bg-(--color-background)">
     {{-- Header só no desktop --}}
     <div
         class="hidden sm:grid grid-cols-12 items-center px-5 py-3 bg-(--color-surface)
@@ -29,7 +29,7 @@
 
                     <!-- User -->
                     <div class="col-span-6 min-w-0">
-                        <p class="truncate text-sm font-semibold text-(--color-primary)">
+                        <p class="truncate text-sm font-semibold text-(--color-primary) capitalize">
                             {{ $row['user']->name }}
                         </p>
                     </div>
@@ -59,7 +59,7 @@
                             <span
                                 class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none
                                        border border-(--color-border)/30 bg-(--color-surface)/60 text-(--color-primary)">
-                                <span class="text-sm leading-none">{{ ReactionEmoji::emojiFromId($r['emoji_id']) }}</span>
+                                <span class="text-lg leading-none">{{ ReactionEmoji::emojiFromId($r['emoji_id']) }}</span>
                                 <span class="text-(--color-muted) leading-none">{{ $r['count'] }}</span>
                             </span>
                         @endforeach
