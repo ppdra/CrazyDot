@@ -95,9 +95,9 @@
                 <x-ui.tabs activeTab="bet">
                     <x-ui.tab.group class="justify-start">
                         <x-ui.tab label="Bet" name="bet" icon="pencil" />
-                        @if ($match->utc_date->isPast())
+                        {{-- @if ($match->utc_date->isPast()) --}}
                             <x-ui.tab label="Results" name="results" icon="document-chart-bar" />
-                        @endif
+                        {{-- @endif --}}
                     </x-ui.tab.group>
 
                     <x-ui.tab.panel name="bet">
