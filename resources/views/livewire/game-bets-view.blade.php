@@ -44,8 +44,8 @@
                     <div class="col-span-2 flex justify-end">
                         <span
                             class="inline-flex items-center justify-center min-w-[44px] rounded-xl border px-3 py-1
-                     text-xs font-extrabold {{ $pointsBadge((int) $row->points->points ?? 0) }}">
-                            {{ (int) $row->points->points ?? 0 }}
+                     text-xs font-extrabold {{ $pointsBadge((int) $row->points?->points ?? 0) }}">
+                            {{ (int) $row->points?->points ?? 0 }}
                         </span>
                     </div>
 
