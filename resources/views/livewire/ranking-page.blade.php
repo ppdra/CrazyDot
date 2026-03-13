@@ -70,7 +70,7 @@
                             </td>
 
                             <!-- nome -->
-                            <td class="px-4 py-3 font-medium text-(--color-primary)">
+                            <td class="px-4 py-3 font-medium text-(--color-primary) capitalize">
                                 {{ $ranking->user->name }}
                                 @if ($isMe)
                                     <span

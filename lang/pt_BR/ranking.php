@@ -10,6 +10,7 @@ return [
         'user' => 'Usuário',
         'points' => 'Pontos',
         'pts' => 'pts',
+        'you' => 'Você',
     ],
 
     'empty' => [
