@@ -78,7 +78,7 @@
                                         style="border-color: color-mix(in oklab, var(--color-btn) 35%, transparent);
                                              background: color-mix(in oklab, var(--color-btn) 12%, transparent);
                                              color: color-mix(in oklab, var(--color-btn) 85%, white 15%);">
-                                        {{ __('ranking-page.table.you') }}
+                                        {{ __('ranking.table.you') }}
                                     </span>
                                 @endif
                             </td>

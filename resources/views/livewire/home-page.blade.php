@@ -123,7 +123,7 @@
                                 </div>
 
                                 <div class="rounded-xl border border-(--color-card-border) bg-transparent p-3">
-                                    <p class="text-[11px] text-(--color-muted)">{{ __('home.leader.streak_non_points') }}</p>
+                                    <p class="text-[11px] text-(--color-muted)">{{ __('home.leader.streak_zero') }}</p>
                                     <p class="mt-1 text-sm font-bold text-(--color-primary)">
                                         {{ $this->rankingFirstPlace->best_non_points_streak }}</p>
                                 </div>
