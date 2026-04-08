@@ -20,7 +20,7 @@ class BetFactory extends Factory
             'user_id' => null,
             'game_id' => null,
             'result_id' => null,
-            'status' => true,
+            'status' => true,   
             'obs' => null,
         ];
     }
