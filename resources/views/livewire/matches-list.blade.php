@@ -14,7 +14,7 @@
             </x-ui.select>
 
             <x-ui.select placeholder="{{ __('matches-list.placeholders.group') }}" wire:model.live="selectedGroup" multiple clearable
-                :disabled="$selectedStage !== '' && $selectedStage !== MatchStageEnum::GROUP_STAGE->value">
+                :disabled="$selectedStage !== null && $selectedStage !== MatchStageEnum::GROUP_STAGE->value">
                 @foreach ($groupOptsList as $group)
                     <x-ui.select.option value="{{ $group }}">
                         {{ $group->label() }}

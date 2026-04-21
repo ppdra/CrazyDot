@@ -23,9 +23,8 @@ class MatchesList extends Component
     public array $selectedStatus;
     public array $selectedGroup;
 
-
-    public ?string $selectedStage = '';
-    public ?string $selectedBetIsPlaced = '';
+    public string $selectedStage;
+    public string $selectedBetIsPlaced;
 
 
     public function mount()
@@ -65,7 +64,7 @@ class MatchesList extends Component
                         ->orWhereIn('away_id', $this->selectedCountry);
                 });
             })
-            ->when($this->selectedBetIsPlaced, function ($q) {
+            ->when($this->selectedBetIsPlaced ?? null, function ($q) {
                 if ($this->selectedBetIsPlaced === 'true') {
                     $q->whereHas('bets', function ($betQuery) {
                         $betQuery
@@ -82,7 +81,7 @@ class MatchesList extends Component
             })
             ->when($this->selectedStatus ?? null, fn($q) => $q->whereIn('status', $this->selectedStatus))
             ->when($this->selectedGroup ?? null, fn($q) => $q->whereIn('group_name', $this->selectedGroup))
-            ->when($this->selectedStage, fn($q) => $q->where('stage', $this->selectedStage))
+            ->when($this->selectedStage ?? null, fn($q) => $q->where('stage', $this->selectedStage))
             ->orderBy('utc_date')
             ->get();
     }
