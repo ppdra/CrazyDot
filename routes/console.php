@@ -21,28 +21,25 @@ Artisan::command('play', function () {
             'color' => "#14b8a6",
         ]);
 
-        User::factory(3)->create();
+        User::factory(7)->create();
         $users = User::all();
 
         $results = Result::factory(5)->create();
 
         $games = Game::where('status', MatchStatusEnum::FINISHED)->get();
 
-        $bets = Bet::factory()
-            ->count(100)
-            ->make()
-            ->each(function (Bet $bet) use ($games, $results, $users) {
-                $user = $users->random(1)->values();
-                $game = $games->random(1)->values();
+        foreach ($users as $user) {
+            foreach ($games as $game) {
                 $result = $results->random(1)->values();
 
-                $userId = $user[0]->id;
-                $bet->user_id = $userId;
-                $bet->game_id = $game[0]->id;
-                $bet->result_id = $result[0]->id;
-
-                $bet->save();
-            });
+                Bet::create([
+                    'user_id' => $user->id,
+                    'game_id' => $game->id,
+                    'result_id' => $result[0]->id,
+                ]);
+            }
+        }
+        
     });
 });
 
