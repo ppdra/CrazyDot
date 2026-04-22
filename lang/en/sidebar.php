@@ -5,4 +5,5 @@ return [
     'matches' => 'Matches',
     'ranking' => 'Ranking',
     'rules' => 'How to Play',
+    'stats' => 'Stats',
 ];

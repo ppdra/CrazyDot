@@ -44,6 +44,8 @@
                         {{ __('matches-list.bet.not_placed') }}
                     </x-ui.select.option>
             </x-ui.select>
+
+            
         </div>
     </div>
 

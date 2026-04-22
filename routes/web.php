@@ -6,6 +6,8 @@ use App\Livewire\HomePage;
 use App\Livewire\HowToPlayPage;
 use App\Livewire\MatchesList;
 use App\Livewire\RankingPage;
+use App\Livewire\StatsMostSelectedResults;
+use App\Livewire\StatsPage;
 use App\Livewire\TagsPage;
 use Illuminate\Support\Facades\Route;
 
@@ -28,14 +30,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/matches', MatchesList::class)->name('matches');
 
-
-
     Route::get('/ranking', RankingPage::class)->name('ranking');
 
     Route::get('/account', AccountPage::class)->name('account');
 
-    Route::get('/how-to-play', HowToPlayPage::class)->name('how-to-play');
+    Route::get('/stats', StatsPage::class)->name('stats');
 
+    Route::get('/how-to-play', HowToPlayPage::class)->name('how-to-play');
 
     Route::get('/logout', LogoutController::class)
         ->name('logout');

@@ -11,5 +11,8 @@ class Result extends Model
     use HasFactory;
 
 
-    
+    public function bets()
+    {
+        return $this->hasMany(Bet::class);
+    }
 }

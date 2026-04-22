@@ -6,6 +6,9 @@ import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.e
 
 import './components/select.js';
 
+import Chart from 'chart.js/auto'
+
+window.Chart = Chart
 
 // now you can register
 // components using Alpine.data(...) and
