@@ -18,7 +18,6 @@
         </x-ui.select>
     </div>
 
-    <!-- EMPTY / CHART -->
     <div class="flex-1 flex items-center justify-center">
 
         @if ($selectedResult && count($data))
@@ -40,6 +39,7 @@
 
 
     </div>
+    
     <div class="flex items-center justify-between mb-4">
         @if ($selectedResult && count($data))
             <span class="text-xs text-zinc-500">

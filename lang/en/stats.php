@@ -8,8 +8,10 @@ return [
     ],
     'stats-chart-points-per-day' => [
         'header' => 'Points per matchday',
+        'info' => 'No data to show',
     ],
     'stats-chart-points-evolution-per-day' => [
         'header' => 'Points evolution per matchday',
+        'info' => 'No data to show',
     ]
 ];

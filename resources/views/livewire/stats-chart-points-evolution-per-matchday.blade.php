@@ -5,11 +5,26 @@
         </h3>
     </div>
 
-    <div wire:ignore x-data="lineChart(@js($labels), @js($datasets))" x-init="init()" class="h-[300px]">
+    <div class="flex-1 flex items-center justify-center">
 
-        <canvas x-ref="canvas"></canvas>
+        @if ($labels && $datasets)
+            <div wire:ignore x-data="lineChart(@js($labels), @js($datasets))" x-init="init()" class="h-[300px]">
+
+                <canvas x-ref="canvas"></canvas>
+
+            </div>
+        @else
+            <x-ui.empty class="w-full border border-neutral-800 rounded-box">
+                <div class="py-6 text-center text-sm text-zinc-500">
+                    {{ __('stats.stats_most_selected_results.info') }}
+                </div>
+            </x-ui.empty>
+        @endif
+
 
     </div>
+
+
 
 </div>
 <script>

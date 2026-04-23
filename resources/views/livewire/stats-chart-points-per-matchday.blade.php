@@ -5,10 +5,21 @@
         </h3>
     </div>
 
-    <div class="overflow-x-auto">
-        <div wire:ignore x-data="barChart(@js($labels), @js($datasets))" x-init="init()">
-            <canvas x-ref="canvas"></canvas>
-        </div>
+    <div class="flex-1 flex items-center justify-center">
+
+        @if ($labels && $datasets)
+            <div class="overflow-x-auto">
+                <div wire:ignore x-data="barChart(@js($labels), @js($datasets))" x-init="init()">
+                    <canvas x-ref="canvas"></canvas>
+                </div>
+            </div>
+        @else
+            <x-ui.empty class="w-full border border-neutral-800 rounded-box">
+                <div class="py-6 text-center text-sm text-zinc-500">
+                    {{ __('stats.stats_most_selected_results.info') }}
+                </div>
+            </x-ui.empty>
+        @endif
     </div>
 
 </div>
