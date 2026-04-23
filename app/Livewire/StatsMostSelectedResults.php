@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enum\MatchStatusEnum;
 use App\Models\Bet;
 use App\Models\Result;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,7 @@ class StatsMostSelectedResults extends Component
             ->whereHas('bets', function ($q) {
                 $q->where('status', true);
                 $q->whereHas('game', function ($q2) {
-                    $q2->where('status', 'finished');
+                    $q2->where('status', MatchStatusEnum::FINISHED);
                 });
             })
             ->withCount('bets')
