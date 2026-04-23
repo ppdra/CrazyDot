@@ -7,7 +7,7 @@ use App\Models\UserPoint;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class StatsChartPointsPerDay extends Component
+class StatsChartPointsEvolutionPerMatchday extends Component
 {
     public array $labels = [];
     public array $datasets = [];
@@ -27,27 +27,34 @@ class StatsChartPointsPerDay extends Component
                 'users.id',
                 'users.name',
                 'users.color',
-                DB::raw('DATE(games.utc_date) as day'),
+                DB::raw('games.matchday as matchday'),
                 DB::raw('SUM(user_points.points) as total')
             )
-            ->groupBy('users.id', 'users.name', 'users.color', 'day')
-            ->orderByRaw('DATE(games.utc_date)')
+            ->groupBy('users.id', 'users.name', 'users.color', 'matchday')
+            ->orderBy('matchday')
             ->get();
 
-        $labels = $rows->pluck('day')->unique()->values();
+        $labels = $rows->pluck('matchday')->unique()->values();
 
         $datasets = $rows->groupBy('id')->map(function ($userRows) use ($labels) {
+
             $user = $userRows->first();
 
-            $data = $labels->map(function ($day) use ($userRows) {
-                $row = $userRows->firstWhere('day', $day);
-                return $row ? (int) $row->total : 0;
+            $running = 0;
+
+            $data = $labels->map(function ($matchday) use ($userRows, &$running) {
+                $row = $userRows->firstWhere('matchday', $matchday);
+                $running += $row ? $row->total : 0;
+                return $running;
             });
 
             return [
                 'label' => $user->name,
                 'data' => $data->values()->toArray(),
+                'borderColor' => $user->color,
                 'backgroundColor' => $user->color,
+                'tension' => 0.4,
+                'fill' => false,
             ];
         });
 
@@ -58,6 +65,6 @@ class StatsChartPointsPerDay extends Component
 
     public function render()
     {
-        return view('livewire.stats-chart-points-per-day');
+        return view('livewire.stats-chart-points-evolution-per-matchday');
     }
 }

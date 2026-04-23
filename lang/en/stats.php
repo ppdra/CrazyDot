@@ -6,4 +6,10 @@ return [
         'info' => 'Select a score to view the distribution',
         'filter_placeholder' => 'Select a score',
     ],
+    'stats-chart-points-per-day' => [
+        'header' => 'Points per matchday',
+    ],
+    'stats-chart-points-evolution-per-day' => [
+        'header' => 'Points evolution per matchday',
+    ]
 ];
