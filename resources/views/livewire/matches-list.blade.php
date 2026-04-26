@@ -59,7 +59,7 @@
 
         @foreach ($gamesList as $match)
             <div wire:key="match-{{ $match->id }}" class="w-full self-start">
-                <livewire:match-component lazy :match="$match" :key="'match-' . $match->id" />
+                <livewire:match-component :match="$match" :key="'match-' . $match->id" />
             </div>
         @endforeach
     </div>
