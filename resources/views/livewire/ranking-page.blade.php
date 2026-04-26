@@ -1,4 +1,5 @@
 @use('App\Enum\MatchStageEnum')
+@use('App\Enum\RankingPositionsEnum')
 
 <div>
     <div class="rounded-2xl border border-(--color-card-border) bg-(--color-card) overflow-hidden mt-4">
@@ -10,7 +11,7 @@
                     <p class="mt-1 text-sm text-(--color-muted)">{{ __('ranking-page.subtitle') }}</p>
                 </div>
 
-               
+
             </div>
         </div>
 
@@ -40,7 +41,7 @@
                                 0 => '🥇',
                                 1 => '🥈',
                                 2 => '🥉',
-                                default => (string) ($index + 1),
+                                default => RankingPositionsEnum::getPositionName($index + 1),
                             };
                         @endphp
 
@@ -51,12 +52,14 @@
                             onmouseover="this.style.backgroundColor='{{ $isMe ? 'color-mix(in oklab, var(--color-btn) 18%, transparent)' : 'color-mix(in oklab, var(--color-border) 16%, transparent)' }}'"
                             onmouseout="this.style.backgroundColor='{{ $isMe ? 'color-mix(in oklab, var(--color-btn) 14%, transparent)' : 'transparent' }}'">
                             <!-- posição -->
+
                             <td class="px-4 py-3 font-semibold text-(--color-primary)">
-                                {{ $index + 1 }}
+                                <x-ui.avatar src="{{ RankingPositionsEnum::getImgUrlByPositionInt($index + 1) }}"
+                                    class="transition-transform duration-200 hover:scale-210 " circle />
                             </td>
 
                             <td class="px-4 py-3 font-semibold flex items-center gap-2 text-xl text-(--color-primary)">
-                                <span class="text-2xl">{{ $medal }}</span>
+                                <span class="text-xl capitalize">{{ $medal }}</span>
 
                                 @if ($ranking->last_position < $ranking->position)
                                     <x-ui.icon name="chevron-double-down" class="size-3 font-bold"

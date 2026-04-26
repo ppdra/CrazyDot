@@ -19,7 +19,7 @@
 <body class="min-h-screen flex items-center justify-center bg-black">
 
     <div class="absolute inset-0">
-        <img src="https://s2-ge.glbimg.com/CeaItOToEoegJLh-fhNC5VV0AjA=/0x0:4706x3120/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2023/T/s/iyxGBbSIABYNQyVwDX0A/2023-06-10t173942z-1803098591-up1ej6a1d23ca-rtrmadp-3-soccer-champions-mci-int-report.jpg"
+        <img src="https://dsmcdn.cloud-bricks.net/fotos/786220/file/desktop/brasil-e-alemanha-bernard-mineirao-finais-64-original3.webp?1762085377"
             alt="Login Background" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-black/70"></div>
     </div>

@@ -45,22 +45,22 @@ class MatchesList extends Component
 
     public function updatedSelectedCountry(): void
     {
-        $this->loadGames();
+        $this->resetPage();
     }
 
     public function updatedSelectedGroup(): void
     {
-        $this->loadGames();
+        $this->resetPage();
     }
 
     public function updatedSelectedStage(): void
     {
-        $this->loadGames();
+        $this->resetPage();
     }
 
     public function updatedSelectedStatus(): void
     {
-        $this->loadGames();
+        $this->resetPage();
     }
 
     private function loadGames()

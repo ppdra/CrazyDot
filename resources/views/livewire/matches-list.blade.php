@@ -11,9 +11,6 @@
                 @foreach ($statusOptsList as $opt)
                     <x-ui.select.option value="{{ $opt->value }}">{{ $opt->label() }}</x-ui.select.option>
                 @endforeach
-
-
-
             </x-ui.select>
 
             <x-ui.select placeholder="{{ __('matches-list.placeholders.group') }}" wire:model.live="selectedGroup"
@@ -62,9 +59,11 @@
 
         @foreach ($gamesList as $match)
             <div wire:key="match-{{ $match->id }}" class="w-full self-start">
-                <livewire:match-component :match="$match" :key="'match-' . $match->id" />
+                <livewire:match-component lazy :match="$match" :key="'match-' . $match->id" />
             </div>
         @endforeach
     </div>
+
+    
 
 </div>

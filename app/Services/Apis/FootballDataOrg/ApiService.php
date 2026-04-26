@@ -13,7 +13,7 @@ class ApiService
     public static function getTeams(): array
     {
         $response = Http::withHeader('X-Auth-Token', config('services.football_data.key'))
-            ->get(config('services.football_data.url').'/competitions/WC/teams')
+            ->get(config('services.football_data.url').'/competitions/CL/teams')
             ->throw()
             ->json();
 
@@ -25,7 +25,7 @@ class ApiService
     public static function getMatches($urlQuery = null): array
     {
         $response = Http::withHeader('X-Auth-Token', config('services.football_data.key'))
-            ->get(config('services.football_data.url').'/competitions/WC/matches'.$urlQuery)
+            ->get(config('services.football_data.url').'/competitions/CL/matches'.$urlQuery)
             ->throw()
             ->json();
 

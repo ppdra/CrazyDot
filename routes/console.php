@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\MatchStatusEnum;
 use App\Models\Bet;
 use App\Models\Game;
 use App\Models\Result;
@@ -25,7 +26,7 @@ Artisan::command('play', function () {
 
         $results = Result::factory(5)->create();
 
-        $games = Game::where('status', Matc::SCHEDULED)->get();
+        $games = Game::where('status', MatchStatusEnum::FINISHED)->get();
 
         foreach ($users as $user) {
             foreach ($games as $game) {

@@ -36,7 +36,7 @@
 
                     const canvas = this.$refs.canvas
 
-                    const widthPerLabel = 100
+                    const widthPerLabel = 150
                     const height = 300
 
                     canvas.style.width = (this.labels.length * widthPerLabel) + 'px'

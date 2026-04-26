@@ -45,7 +45,15 @@
             },
 
             render() {
-                const ctx = this.$refs.canvas.getContext('2d')
+                const canvas = this.$refs.canvas
+
+                    const widthPerLabel = 150
+                    const height = 300
+
+                    canvas.style.width = (this.labels.length * widthPerLabel) + 'px'
+                    canvas.style.height = height + 'px'
+
+                    const ctx = canvas.getContext('2d')
 
                 this.chart = new Chart(ctx, {
                     type: 'line',

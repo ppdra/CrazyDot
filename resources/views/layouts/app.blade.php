@@ -50,5 +50,5 @@
     </x-ui.layout>
 
     @livewireScripts
-</body>
+</body> 
 </html>

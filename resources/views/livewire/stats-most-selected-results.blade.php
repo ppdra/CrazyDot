@@ -73,6 +73,7 @@
 
         renderChart() {
             if (!this.$refs.canvas) return
+            
 
             const ctx = this.$refs.canvas.getContext('2d')
             if (!ctx) return
