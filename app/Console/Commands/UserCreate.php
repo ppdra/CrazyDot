@@ -33,10 +33,12 @@ class UserCreate extends Command
         $email = text('User email:');
         $name = text('User name:');
         $password = text('User password:');
+        $color  = fake()->unique()->hexColor();
 
-        DB::transaction(function () use ($email, $name, $password) {
+        DB::transaction(function () use ($color, $email, $name, $password) {
             User::query()->create([
                 'email' => $email,
+                'color' => $color,
                 'name' => $name,
                 'password' => Hash::make($password),
             ]);

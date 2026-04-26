@@ -26,7 +26,7 @@ Artisan::command('play', function () {
 
         $results = Result::factory(5)->create();
 
-        $games = Game::where('status', MatchStatusEnum::FINISHED)->get();
+        $games = Game::where('status', Matc::SCHEDULED)->get();
 
         foreach ($users as $user) {
             foreach ($games as $game) {

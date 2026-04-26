@@ -13,6 +13,7 @@ class AccountPage extends Component
     public User $user;
 
     public string $email;
+    public string $color;
     public string $password;
     public string $passwordConfirmation;
 
@@ -20,20 +21,25 @@ class AccountPage extends Component
     {
         $this->user = Auth::user();
         $this->email = $this->user->email;
+        $this->color = $this->user->color;
     }
 
     public function save()
     {
         $validated = $this->validate([
             'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\d\w]).{8,255}$/'],
-            'passwordConfirmation' => ['required', 'string', 'min:8', 'max:255', 'same:password'],
+            'color' => ['required', 'hex_color'],
+            'password' => ['nullable', 'string', 'min:8', 'max:255', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\d\w]).{8,255}$/'],
+            'passwordConfirmation' => ['nullable', 'string', 'min:8', 'max:255', 'same:password'],
         ]);
 
         try {
             DB::transaction(function () use ($validated) {
                 $this->user->email = $validated['email'];
-                $this->user->password = Hash::make($validated['password']);
+                $this->user->color = $validated['color'];
+                if ($validated['password']) {
+                    $this->user->password = Hash::make($validated['password']);
+                }
                 $this->user->save();
             });
 
