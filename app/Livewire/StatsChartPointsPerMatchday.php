@@ -10,6 +10,7 @@ use Livewire\Component;
 class StatsChartPointsPerMatchday extends Component
 {
     public array $labels = [];
+
     public array $datasets = [];
 
     public function mount()
@@ -41,6 +42,7 @@ class StatsChartPointsPerMatchday extends Component
 
             $data = $labels->map(function ($day) use ($userRows) {
                 $row = $userRows->firstWhere('matchday', $day);
+
                 return $row ? (int) $row->total : 0;
             });
 
@@ -54,7 +56,6 @@ class StatsChartPointsPerMatchday extends Component
         $this->labels = $labels->toArray();
         $this->datasets = $datasets->values()->toArray();
     }
-
 
     public function render()
     {

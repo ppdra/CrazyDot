@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Game;
-use App\Models\GameResult;
 use App\Models\Result;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

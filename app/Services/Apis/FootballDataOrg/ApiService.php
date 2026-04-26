@@ -10,32 +10,27 @@ use Illuminate\Support\Facades\Http;
 
 class ApiService
 {
-
-
     public static function getTeams(): array
     {
         $response = Http::withHeader('X-Auth-Token', config('services.football_data.key'))
-            ->get(config('services.football_data.url') . '/competitions/WC/teams')
+            ->get(config('services.football_data.url').'/competitions/WC/teams')
             ->throw()
             ->json();
 
         return collect($response['teams'])
-            ->map(fn($team) => TeamDTO::fromApi((object) $team))
+            ->map(fn ($team) => TeamDTO::fromApi((object) $team))
             ->all();
     }
-
 
     public static function getMatches($urlQuery = null): array
     {
         $response = Http::withHeader('X-Auth-Token', config('services.football_data.key'))
-            ->get(config('services.football_data.url') . '/competitions/WC/matches' . $urlQuery)
+            ->get(config('services.football_data.url').'/competitions/WC/matches'.$urlQuery)
             ->throw()
             ->json();
 
-
         return collect($response['matches'])
-            ->map(fn($match) => MatchDTO::fromApi((object) $match))
+            ->map(fn ($match) => MatchDTO::fromApi((object) $match))
             ->all();
     }
-
 }

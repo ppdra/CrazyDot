@@ -3,14 +3,15 @@
 namespace App\Support;
 
 use Carbon\Carbon;
-use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\App;
 
 class Datetime
 {
     public static function datetime(?Carbon $dt): string
     {
-        if (! $dt) return '--';
+        if (! $dt) {
+            return '--';
+        }
 
         $tz ??= session('tz');
 

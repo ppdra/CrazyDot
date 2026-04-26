@@ -11,7 +11,6 @@ class Bet extends Model
     /** @use HasFactory<\Database\Factories\BetFactory> */
     use HasFactory;
 
-
     public function game()
     {
         return $this->belongsTo(Game::class);

@@ -14,6 +14,7 @@ class LastResults extends Component
     {
         $this->lastResults = UserPoint::orderBy('created_at', 'desc')->limit(7)->get();
     }
+
     public function render()
     {
         return view('livewire.last-results');

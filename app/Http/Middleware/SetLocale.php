@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
@@ -24,7 +22,7 @@ class SetLocale
             ?? $this->fromAcceptLanguage($request, $supported)
             ?? config('app.locale');
 
-        if (!in_array($locale, $supported, true)) {
+        if (! in_array($locale, $supported, true)) {
             $locale = config('app.fallback_locale');
         }
 
@@ -42,8 +40,8 @@ class SetLocale
 
         $map = [
             'pt-br' => 'pt_BR',
-            'pt'    => 'pt_BR',
-            'en'    => 'en',
+            'pt' => 'pt_BR',
+            'en' => 'en',
             'en-us' => 'en',
         ];
 

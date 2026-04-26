@@ -1,6 +1,5 @@
 <?php
 
-use App\Enum\MatchStatusEnum;
 use App\Models\Bet;
 use App\Models\Game;
 use App\Models\Result;
@@ -18,7 +17,7 @@ Artisan::command('play', function () {
             'name' => 'Test User',
             'email' => 'test@test.com',
             'password' => Hash::make('Nao.Quero01'),
-            'color' => "#14b8a6",
+            'color' => '#14b8a6',
         ]);
 
         User::factory(7)->create();
@@ -39,7 +38,7 @@ Artisan::command('play', function () {
                 ]);
             }
         }
-        
+
     });
 });
 

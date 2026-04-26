@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class PointsCalculator
 {
-
     public function calculateMatchPoints(Game $game): void
     {
         $realResult = $game->gameResult->result;
@@ -101,6 +100,7 @@ class PointsCalculator
                     }
 
                     $userRanking->save();
+
                     return;
                 }
 
@@ -113,6 +113,7 @@ class PointsCalculator
                     }
 
                     $userRanking->save();
+
                     return;
                 }
 
@@ -121,7 +122,7 @@ class PointsCalculator
 
                 $userRanking->save();
             });
-        };
+        }
     }
 
     private function calculateRankingPositions(): void

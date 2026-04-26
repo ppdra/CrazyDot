@@ -42,7 +42,7 @@ enum MatchStatusEnum: string
 
     public function translationKey(): string
     {
-        return 'enums.match_status.' . $this->value;
+        return 'enums.match_status.'.$this->value;
     }
 
     public function label(): string

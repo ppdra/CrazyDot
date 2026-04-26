@@ -13,5 +13,5 @@ return [
     'stats-chart-points-evolution-per-day' => [
         'header' => 'Evolução da pontuação por rodada',
         'info' => 'Sem dados para ser exibido',
-    ]
+    ],
 ];

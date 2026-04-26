@@ -11,8 +11,8 @@
     <div class="mb-4">
         <x-ui.select placeholder="{{ __('stats.stats_most_selected_results.filter_placeholder') }}" wire:model.live="selectedResult" searchable>
             @foreach ($results as $opt)
-                <x-ui.select.option value="{{ $opt['id'] }}">
-                    {{ $opt['home_score'] }}x{{ $opt['away_score'] }}
+                <x-ui.select.option value="{{ $opt['normalized_result'] }}">
+                    {{ $opt['normalized_result'] }}
                 </x-ui.select.option>
             @endforeach
         </x-ui.select>

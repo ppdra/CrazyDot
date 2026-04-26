@@ -18,7 +18,7 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
-        $throttleKey = 'login:' . $request->ip();
+        $throttleKey = 'login:'.$request->ip();
 
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
             throw ValidationException::withMessages([
@@ -55,7 +55,6 @@ class LoginController extends Controller
             'tz',
             ($tz && in_array($tz, timezone_identifiers_list())) ? $tz : 'UTC'
         );
-
 
         return redirect()->intended(route('home'));
     }

@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class RankingPage extends Component
 {
-
     public Collection $rankings;
+
     public int $totalPoints;
 
     public function mount()

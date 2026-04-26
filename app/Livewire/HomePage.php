@@ -10,6 +10,7 @@ use Livewire\Component;
 class HomePage extends Component
 {
     public ?Ranking $rankingFirstPlace;
+
     public int $totalPoints;
 
     public function mount()

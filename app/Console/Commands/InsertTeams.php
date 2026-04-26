@@ -29,18 +29,18 @@ class InsertTeams extends Command
     {
         $teams = ApiService::getTeams();
 
-        $payload = collect($teams)->map(fn($t) => [
+        $payload = collect($teams)->map(fn ($t) => [
             'external_id' => $t->externalId,
-            'name'        => $t->name,
-            'slug'        => $t->slug,
-            'logo_url'    => $t->logoUrl,
-            'updated_at'  => now(),
-            'created_at'  => now(),
+            'name' => $t->name,
+            'slug' => $t->slug,
+            'logo_url' => $t->logoUrl,
+            'updated_at' => now(),
+            'created_at' => now(),
         ])->all();
 
         Team::query()->upsert(
             $payload,
-            ['external_id'],                 
+            ['external_id'],
             ['name', 'slug', 'logo_url', 'updated_at']
         );
     }

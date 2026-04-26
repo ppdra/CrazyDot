@@ -52,5 +52,4 @@ class Game extends Model
     {
         return $this->hasMany(UserPoint::class, 'game_id');
     }
-
 }

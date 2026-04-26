@@ -9,11 +9,8 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-use function Symfony\Component\Clock\now;
-
 class MatchBadgeStatus extends Component
 {
-
     public Game $match;
 
     public array $badgeInfos = [];
@@ -49,7 +46,7 @@ class MatchBadgeStatus extends Component
             $diff <= 30 => ['color' => 'yellow', 'label' => 'Starting Soon'],
             $diff <= 60 => ['color' => 'blue', 'label' => 'Today'],
 
-            default     => ['color' => 'purple', 'label' => 'Upcoming'],
+            default => ['color' => 'purple', 'label' => 'Upcoming'],
         };
     }
 

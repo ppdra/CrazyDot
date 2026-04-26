@@ -53,13 +53,12 @@ class DatabaseSeeder extends Seeder
                 $result = $results->random(1)->values();
 
                 $userId = $user[0]->id === 7 ? 1 : $user[0]->id;
-                $bet->user_id = $userId ;
+                $bet->user_id = $userId;
                 $bet->game_id = $game[0]->id;
                 $bet->result_id = $result[0]->id;
 
                 $bet->save();
             });
-
 
     }
 }

@@ -21,7 +21,7 @@ final class MatchDTO
         public readonly Carbon $utcDate,
         public readonly MatchStatusEnum $status,
         public readonly ?int $homeScore,
-        public readonly ?int $awayScore ,
+        public readonly ?int $awayScore,
     ) {}
 
     public static function fromApi(object $match): self

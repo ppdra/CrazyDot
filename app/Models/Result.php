@@ -10,7 +10,6 @@ class Result extends Model
     /** @use HasFactory<\Database\Factories\ResultFactory> */
     use HasFactory;
 
-
     public function bets()
     {
         return $this->hasMany(Bet::class);

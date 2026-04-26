@@ -37,6 +37,4 @@ return [
         'GROUP_STAGE' => 'Group Stage',
     ],
 
-
-
 ];

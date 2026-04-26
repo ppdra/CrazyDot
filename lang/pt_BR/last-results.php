@@ -16,5 +16,4 @@ return [
     'footer' => 'Mostrando os resultados mais recentes.',
     'last_update' => 'Última atualização: :time',
 
-    
 ];

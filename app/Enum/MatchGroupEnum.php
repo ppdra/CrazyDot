@@ -19,7 +19,7 @@ enum MatchGroupEnum: string
 
     public function translationKey(): string
     {
-        return 'enums.match_group.' . $this->value;
+        return 'enums.match_group.'.$this->value;
     }
 
     public function label(): string

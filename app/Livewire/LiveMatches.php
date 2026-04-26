@@ -16,7 +16,7 @@ class LiveMatches extends Component
         $this->liveGames = Game::where('status', MatchStatusEnum::LIVE)
             ->orderBy('utc_date')
             ->get();
-            
+
         return view('livewire.live-matches');
     }
 }

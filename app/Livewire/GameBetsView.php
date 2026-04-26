@@ -10,6 +10,7 @@ use Livewire\Component;
 class GameBetsView extends Component
 {
     public Collection $bets;
+
     public int $gameId;
 
     public function mount(int $gameId)

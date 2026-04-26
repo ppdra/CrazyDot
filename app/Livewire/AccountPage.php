@@ -13,8 +13,11 @@ class AccountPage extends Component
     public User $user;
 
     public string $email;
+
     public string $color;
+
     public string $password;
+
     public string $passwordConfirmation;
 
     public function mount()

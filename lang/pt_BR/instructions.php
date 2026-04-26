@@ -19,7 +19,6 @@ return [
                 'save_label' => 'Salvar',
             ],
 
-
         ],
 
         'how_to_play' => [
@@ -87,8 +86,6 @@ return [
                 'auto_update_description' => 'O ranking pode ser atualizado imediatamente após a validação do jogo. Caso haja algum atraso na validação, a pontuação será ajustada automaticamente assim que o resultado for confirmado.',
             ],
         ],
-
-
 
     ],
 

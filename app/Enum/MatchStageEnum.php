@@ -13,8 +13,6 @@ enum MatchStageEnum: string
     case LAST_64 = 'LAST_64';
     case GROUP_STAGE = 'GROUP_STAGE';
 
-
-
     public static function fromApi(string $status): self
     {
         return match ($status) {
@@ -31,7 +29,7 @@ enum MatchStageEnum: string
 
     public function translationKey(): string
     {
-        return 'enums.match_stage.' . $this->value;
+        return 'enums.match_stage.'.$this->value;
     }
 
     public function label(): string

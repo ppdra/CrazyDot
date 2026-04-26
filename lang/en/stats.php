@@ -13,5 +13,5 @@ return [
     'stats-chart-points-evolution-per-day' => [
         'header' => 'Points evolution per matchday',
         'info' => 'No data to show',
-    ]
+    ],
 ];

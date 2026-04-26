@@ -43,12 +43,12 @@ class InsertMatchesResults extends Command
                 ]);
             }
 
-            if (!$game->gameResult()->exists()) {
+            if (! $game->gameResult()->exists()) {
                 $result = Result::where('home_score', $match->homeScore)
                     ->where('away_score', $match->awayScore)
                     ->first();
 
-                if (!$result) {
+                if (! $result) {
                     $result = Result::create([
                         'home_score' => $match->homeScore ?? null,
                         'away_score' => $match->awayScore ?? null,
@@ -65,7 +65,3 @@ class InsertMatchesResults extends Command
         }
     }
 }
-
-
-
-

@@ -6,14 +6,11 @@ use App\Livewire\HomePage;
 use App\Livewire\HowToPlayPage;
 use App\Livewire\MatchesList;
 use App\Livewire\RankingPage;
-use App\Livewire\StatsMostSelectedResults;
 use App\Livewire\StatsPage;
-use App\Livewire\TagsPage;
 use Illuminate\Support\Facades\Route;
 
-
 Route::group(['namespace' => ''], function () {
-    require __DIR__ . '/auth.php';
+    require __DIR__.'/auth.php';
 });
 
 Route::get('/lang/{locale}', function ($locale) {

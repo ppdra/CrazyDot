@@ -9,9 +9,13 @@ use Livewire\Component;
 class EmojiPicker extends Component
 {
     public int $selectedEmojiId = 0;
+
     public int $gameId;
+
     public int $betId;
+
     public int $homeScore;
+
     public int $awayScore;
 
     public array $userReactions;
@@ -38,15 +42,14 @@ class EmojiPicker extends Component
         $userId = Auth::id();
 
         $reaction = BetReaction::where([
-            'bet_id'   => $this->betId,
-            'user_id'  => $userId,
+            'bet_id' => $this->betId,
+            'user_id' => $userId,
             'emoji_id' => $emojiId,
         ])->first();
 
-
         $reaction ? $reaction->delete() : BetReaction::create([
-            'bet_id'   => $this->betId,
-            'user_id'  => $userId,
+            'bet_id' => $this->betId,
+            'user_id' => $userId,
             'emoji_id' => $emojiId,
         ]);
 

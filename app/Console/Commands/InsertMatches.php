@@ -30,12 +30,12 @@ class InsertMatches extends Command
     {
         $matches = ApiService::getMatches();
 
-        $payload = collect($matches)->map(fn($m) => [
+        $payload = collect($matches)->map(fn ($m) => [
             'external_id' => $m->externalId,
             'home_id' => Team::where('external_id', $m->externalHomeId)->value('id') ?? null,
             'away_id' => Team::where('external_id', $m->externalAwayId)->value('id') ?? null,
             'group_name' => $m->group,
-            'matchday'  => $m->matchday,
+            'matchday' => $m->matchday,
             'stage' => $m->stage,
             'utc_date' => $m->utcDate,
             'status' => $m->status,
@@ -45,10 +45,9 @@ class InsertMatches extends Command
 
         Game::query()->upsert(
             $payload,
-            ['external_id'],                 
+            ['external_id'],
             ['home_id', 'away_id', 'group_name', 'matchday', 'stage', 'utc_date', 'status', 'updated_at']
         );
 
-        
     }
 }

@@ -13,15 +13,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-
 class MatchComponent extends Component
 {
     public Game $match;
+
     public int $realHomeScore = 0;
+
     public int $realAwayScore = 0;
+
     public int $homeScore = 0;
+
     public int $awayScore = 0;
+
     public $userBet;
+
     public bool $betIsPlaced = false;
 
     public function mount(Game $match)
@@ -50,17 +55,17 @@ class MatchComponent extends Component
             ->first();
     }
 
-    public function getRemainingTime(): int
-    {
-        return Carbon::now()->diffInMinutes($this->match->utc_date);
-    }
+    // public function getRemainingTime(): int
+    // {
+    //     return Carbon::now()->diffInMinutes($this->match->utc_date);
+    // }
 
-    public function shouldPoll(): bool
-    {
-        $diff = $this->getRemainingTime();
+    // public function shouldPoll(): bool
+    // {
+    //     $diff = $this->getRemainingTime();
 
-        return $this->match->status === MatchStatusEnum::LIVE || ($diff !== null && $diff <= 90 && $diff >= -180);
-    }
+    //     return $this->match->status === MatchStatusEnum::LIVE || ($diff !== null && $diff <= 90 && $diff >= -180);
+    // }
 
     public function incrementScore($team)
     {
@@ -123,7 +128,7 @@ class MatchComponent extends Component
                 );
             $this->dispatch('$refresh');
         } catch (Exception $e) {
-            Log::error(self::class . ' - Error saving user bet', ['error' => $e->getMessage()]);
+            Log::error(self::class.' - Error saving user bet', ['error' => $e->getMessage()]);
             $this->dispatch(
                 'notify',
                 type: 'error',
@@ -132,7 +137,6 @@ class MatchComponent extends Component
             );
         }
     }
-
 
     public function removeUserBet()
     {
@@ -146,11 +150,12 @@ class MatchComponent extends Component
                     ->where('status', true)
                     ->first();
 
-                if (!$isValid) {
+                if (! $isValid) {
                     $bet->update([
                         'status' => false,
                         'obs' => $obs,
                     ]);
+
                     return;
                 }
 
@@ -158,7 +163,7 @@ class MatchComponent extends Component
                     'status' => false,
                     'obs' => $obs,
                 ]);
-                return;
+
             });
 
             if ($isValid) {
@@ -178,7 +183,7 @@ class MatchComponent extends Component
                     duration: 4000
                 );
         } catch (Exception $e) {
-            Log::error(self::class . ' - Error removing user bet', ['error' => $e->getMessage()]);
+            Log::error(self::class.' - Error removing user bet', ['error' => $e->getMessage()]);
             $this->dispatch(
                 'notify',
                 type: 'error',

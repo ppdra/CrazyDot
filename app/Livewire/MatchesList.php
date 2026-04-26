@@ -16,16 +16,22 @@ class MatchesList extends Component
     use WithPagination;
 
     public array $countryOptsList;
+
     public array $groupOptsList;
+
     public array $stageOptsList;
+
     public array $statusOptsList;
+
     public array $selectedCountry;
+
     public array $selectedStatus;
+
     public array $selectedGroup;
 
     public string $selectedStage;
-    public string $selectedBetIsPlaced;
 
+    public string $selectedBetIsPlaced;
 
     public function mount()
     {
@@ -41,14 +47,17 @@ class MatchesList extends Component
     {
         $this->loadGames();
     }
+
     public function updatedSelectedGroup(): void
     {
         $this->loadGames();
     }
+
     public function updatedSelectedStage(): void
     {
         $this->loadGames();
     }
+
     public function updatedSelectedStatus(): void
     {
         $this->loadGames();
@@ -58,6 +67,10 @@ class MatchesList extends Component
     {
         return Game::query()
             ->with(['homeTeam', 'awayTeam', 'gameResult', 'bets.result'])
+            ->where(function ($q) {
+                $q->whereNotNull('home_id')
+                    ->orWhereNotNull('away_id');
+            })
             ->when($this->selectedCountry ?? null, function ($q) {
                 $q->where(function ($qq) {
                     $qq->whereIn('home_id', $this->selectedCountry)
@@ -79,9 +92,9 @@ class MatchesList extends Component
                     });
                 }
             })
-            ->when($this->selectedStatus ?? null, fn($q) => $q->whereIn('status', $this->selectedStatus))
-            ->when($this->selectedGroup ?? null, fn($q) => $q->whereIn('group_name', $this->selectedGroup))
-            ->when($this->selectedStage ?? null, fn($q) => $q->where('stage', $this->selectedStage))
+            ->when($this->selectedStatus ?? null, fn ($q) => $q->whereIn('status', $this->selectedStatus))
+            ->when($this->selectedGroup ?? null, fn ($q) => $q->whereIn('group_name', $this->selectedGroup))
+            ->when($this->selectedStage ?? null, fn ($q) => $q->where('stage', $this->selectedStage))
             ->orderBy('utc_date')
             ->get();
     }
@@ -94,8 +107,6 @@ class MatchesList extends Component
             ->pluck('name', 'id')
             ->all();
     }
-
-
 
     public function render()
     {
