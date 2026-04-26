@@ -1,7 +1,7 @@
 services:
     crazydot-app:
         build:
-            context: './docker'
+            context: './vendor/laravel/sail/runtimes/8.5'
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
