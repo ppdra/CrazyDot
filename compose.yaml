@@ -6,7 +6,6 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: 'sail-8.5/app'
-        command: 'php artisan schedule:work'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
