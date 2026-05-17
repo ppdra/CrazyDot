@@ -14,7 +14,7 @@ Artisan::command('play', function () {
 
     DB::transaction(function () {
 
-        Game::whereNotIn('id',[1,2,3,4,5,6,7,8,9,10])->delete();
+        Game::all()->limit(50)->delete();
 
         User::factory()->create([
             'name' => 'Test User',
