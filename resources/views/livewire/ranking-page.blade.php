@@ -20,7 +20,7 @@
                 <!-- Head -->
                 <thead class="text-(--color-muted) text-xs uppercase tracking-wide">
                     <tr style="background: color-mix(in oklab, var(--color-border) 18%, transparent);">
-                        <th class="px-4 py-3 text-left">{{ __('ranking-page.table.index') }}</th>
+                        {{-- <th class="px-4 py-3 text-left">{{ __('ranking-page.table.index') }}</th> --}}
                         <th class="px-4 py-3 text-left">{{ __('ranking-page.table.position') }}</th>
                         <th class="px-4 py-3 text-left">{{ __('ranking-page.table.name') }}</th>
                         <th class="px-4 py-3 text-center">{{ __('ranking-page.table.points') }}</th>
@@ -53,10 +53,10 @@
                             onmouseout="this.style.backgroundColor='{{ $isMe ? 'color-mix(in oklab, var(--color-btn) 14%, transparent)' : 'transparent' }}'">
                             <!-- posição -->
 
-                            <td class="px-4 py-3 font-semibold text-(--color-primary)">
+                            {{-- <td class="px-4 py-3 font-semibold text-(--color-primary)">
                                 <x-ui.avatar src="{{ RankingPositionsEnum::getImgUrlByPositionInt($index + 1) }}"
                                     class="transition-transform duration-200 hover:scale-210 " circle />
-                            </td>
+                            </td> --}}
 
                             <td class="px-4 py-3 font-semibold flex items-center gap-2 text-xl text-(--color-primary)">
                                 <span class="text-lg capitalize">{{ $medal }}</span>
