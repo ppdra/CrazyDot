@@ -47,6 +47,6 @@
             </x-slot:menu>
         </x-ui.dropdown>
 
-        <x-ui.theme-switcher variant="inline" />
+        {{-- <x-ui.theme-switcher variant="inline" /> --}}
     </div>
 </x-ui.layout.header>
