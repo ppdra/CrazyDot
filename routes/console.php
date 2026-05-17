@@ -14,7 +14,7 @@ Artisan::command('play', function () {
 
     DB::transaction(function () {
 
-        Game::all()->limit(50)->delete();
+        Game::limit(50)->delete();
 
         User::factory()->create([
             'name' => 'Test User',
