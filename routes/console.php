@@ -14,6 +14,8 @@ Artisan::command('play', function () {
 
     DB::transaction(function () {
 
+        Game::whereNotIn('id',[1,2,3,4,5,6,7,8,9,10])->delete();
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@test.com',
@@ -21,7 +23,7 @@ Artisan::command('play', function () {
             'color' => '#14b8a6',
         ]);
 
-        User::factory(7)->create();
+        User::factory(6)->create();
         $users = User::all();
 
         $results = Result::factory(5)->create();
