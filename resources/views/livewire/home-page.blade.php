@@ -1,5 +1,7 @@
 @php
-    $accuracy = $this->totalPoints > 0 ? ($this->rankingFirstPlace->points ?? 0 / $this->totalPoints) * 100 : 0;
+    $accuracy = $this->totalPoints > 0
+        ? (($this->rankingFirstPlace->points ?? 0) / $this->totalPoints) * 100
+        : 0;
 @endphp
 
 <div>

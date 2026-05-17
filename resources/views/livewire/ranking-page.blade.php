@@ -41,7 +41,7 @@
                                 0 => '🥇',
                                 1 => '🥈',
                                 2 => '🥉',
-                                default => RankingPositionsEnum::getPositionName($index + 1),
+                                default => $index + 1,
                             };
                         @endphp
 
@@ -59,7 +59,7 @@
                             </td>
 
                             <td class="px-4 py-3 font-semibold flex items-center gap-2 text-xl text-(--color-primary)">
-                                <span class="text-xl capitalize">{{ $medal }}</span>
+                                <span class="text-lg capitalize">{{ $medal }}</span>
 
                                 @if ($ranking->last_position < $ranking->position)
                                     <x-ui.icon name="chevron-double-down" class="size-3 font-bold"
