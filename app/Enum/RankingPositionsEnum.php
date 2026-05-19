@@ -17,7 +17,10 @@ enum RankingPositionsEnum: int
         return match ($position) {
             1 => 'images/position-1.jpeg',
             2 => 'images/position-2.jpeg',
-            default => 'images/position-1.jpeg',
+            5 => 'images/position-5.png',
+            6 => 'images/position-6.png',
+            7 => 'images/position-7.jpeg',
+            default => 'nada',
         };
     }
 

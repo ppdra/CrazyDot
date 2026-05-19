@@ -24,17 +24,6 @@ class StatsMostSelectedResults extends Component
 
     public function mount()
     {
-        $this->results = Result::query()
-            ->whereHas('bets', function ($q) {
-                $q->where('status', true);
-                $q->whereHas('game', function ($q2) {
-                    // $q2->where('status', MatchStatusEnum::FINISHED);
-                });
-            })
-            ->withCount('bets')
-            ->orderByDesc('bets_count')
-            ->get()
-            ->toArray();
 
         $this->results = Result::query()
             ->whereHas('bets', function ($q) {
@@ -62,13 +51,14 @@ class StatsMostSelectedResults extends Component
 
         return Result::query()
             ->where(function ($q) use ($a, $b) {
-                $q->where([
-                    ['home_score', $a],
-                    ['away_score', $b],
-                ])->orWhere([
-                    ['home_score', $b],
-                    ['away_score', $a],
-                ]);
+                $q->where(function ($q2) use ($a, $b) {
+                    $q2->where('home_score', $a)
+                        ->where('away_score', $b);
+                })
+                    ->orWhere(function ($q2) use ($a, $b) {
+                        $q2->where('home_score', $b)
+                            ->where('away_score', $a);
+                    });
             })
             ->pluck('id')
             ->toArray();
