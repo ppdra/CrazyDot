@@ -45,7 +45,7 @@ class Game extends Model
 
     public function validatedPlacedBets()
     {
-        return $this->hasMany(Bet::class, 'game_id')->where('status', true)->orderBy('created_at');
+        return $this->hasMany(Bet::class, 'game_id')->where('status', true)->orderBy('created_at', 'asc');
     }
 
     public function userPoints()
