@@ -23,6 +23,7 @@ enum ReactionEmoji: int
     case SHIT = 17;
     case COLD = 18;
     case MILK = 19;
+    case KRABBY = 20;
 
     public function emoji(): string
     {
@@ -46,6 +47,7 @@ enum ReactionEmoji: int
             self::SHIT => '💩',
             self::COLD => '🥶',
             self::MILK => '🍼',
+            self::KRABBY => '🦀',
         };
     }
 
@@ -62,6 +64,5 @@ enum ReactionEmoji: int
         return self::tryFrom($id)?->emoji() ?? '❓';
     }
 }
-
 
 
