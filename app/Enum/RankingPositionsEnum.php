@@ -16,11 +16,11 @@ enum RankingPositionsEnum: int
     {
         return match ($position) {
             1 => 'images/position-1.png',
-            2 => 'images/position-2.jpeg',
-            3 => 'images/position-3.png',
+            2 => 'images/position-2.png',
+            3 => 'images/position-3.jpeg',
             4 => 'images/position-4.jpeg',
-            5 => 'images/position-5.jpeg',
-            6 => 'images/position-6.png',
+            5 => 'images/position-5.png',
+            6 => 'images/position-6.jpg',
             7 => 'images/position-7.jpeg',
             default => 'nada',
         };
@@ -30,10 +30,11 @@ enum RankingPositionsEnum: int
     {
         return match ($position) {
             1 => 'nomade raiz',
-            3 => 'petista do job',
-            4 => 'banana leitada',
-            5 => 'chimpa',
-            6 => 'burn',
+            2 => 'petista do job',
+            3 => 'banana leitada',
+            4 => 'chimpa',
+            5 => 'burn',
+            6 => 'acorda cara',
             7 => 'peixe linguiço',
             default => '--',
         };
