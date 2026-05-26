@@ -53,9 +53,15 @@
                             onmouseout="this.style.backgroundColor='{{ $isMe ? 'color-mix(in oklab, var(--color-btn) 14%, transparent)' : 'transparent' }}'">
                             <!-- posição -->
 
-                            <td class="px-4 py-3 font-semibold text-(--color-primary)">
-                                <x-ui.avatar src="{{ RankingPositionsEnum::getImgUrlByPositionInt($index + 1) }}"
-                                    class="transition-transform duration-200 hover:scale-210 " circle />
+                            <td class="px-4 py-3 text-(--color-primary)">
+                                <div class="flex flex-col items-center gap-1">
+                                    <x-ui.avatar src="{{ RankingPositionsEnum::getImgUrlByPositionInt($index + 1) }}"
+                                        class="transition-transform duration-200 hover:scale-210" circle />
+
+                                    <span class="text-xs font-medium capitalize">
+                                        {{ RankingPositionsEnum::getPositionName($index + 1) }}
+                                    </span>
+                                </div>
                             </td>
 
                             <td class="px-4 py-3 font-semibold flex items-center gap-2 text-xl text-(--color-primary)">

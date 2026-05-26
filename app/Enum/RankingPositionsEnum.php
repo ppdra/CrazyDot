@@ -15,9 +15,11 @@ enum RankingPositionsEnum: int
     public static function getImgUrlByPositionInt(int $position): string
     {
         return match ($position) {
-            1 => 'images/position-1.jpeg',
+            1 => 'images/position-1.png',
             2 => 'images/position-2.jpeg',
-            5 => 'images/position-5.png',
+            3 => 'images/position-3.png',
+            4 => 'images/position-4.jpeg',
+            5 => 'images/position-5.jpeg',
             6 => 'images/position-6.png',
             7 => 'images/position-7.jpeg',
             default => 'nada',
@@ -27,7 +29,12 @@ enum RankingPositionsEnum: int
     public static function getPositionName(int $position): string
     {
         return match ($position) {
-            7 => 'banana leitada',
+            1 => 'nomade raiz',
+            3 => 'petista do job',
+            4 => 'banana leitada',
+            5 => 'chimpa',
+            6 => 'burn',
+            7 => 'peixe linguiço',
             default => '--',
         };
     }

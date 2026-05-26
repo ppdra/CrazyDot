@@ -55,18 +55,7 @@ class MatchComponent extends Component
             ->first();
     }
 
-    // public function getRemainingTime(): int
-    // {
-    //     return Carbon::now()->diffInMinutes($this->match->utc_date);
-    // }
-
-    // public function shouldPoll(): bool
-    // {
-    //     $diff = $this->getRemainingTime();
-
-    //     return $this->match->status === MatchStatusEnum::LIVE || ($diff !== null && $diff <= 90 && $diff >= -180);
-    // }
-
+    
     public function incrementScore($team)
     {
         match ($team) {
@@ -88,8 +77,10 @@ class MatchComponent extends Component
     public function saveUserBet()
     {
         try {
-            $isValid = $this->match->utc_date->isFuture();
-            DB::transaction(function () use ($isValid) {
+            $authUser = Auth::user();
+
+            $isValid = now()->lt($this->match->utc_date->subMinutes(10));
+            DB::transaction(function () use ($authUser, $isValid) {
                 $result = Result::updateOrCreate([
                     'home_score' => $this->homeScore,
                     'away_score' => $this->awayScore,
@@ -98,7 +89,7 @@ class MatchComponent extends Component
                 $obs = $isValid ? null : 'Bet placed after match start time';
                 Bet::updateOrCreate(
                     [
-                        'user_id' => Auth::user()->id,
+                        'user_id' => $authUser->id,
                         'game_id' => $this->match->id,
                         'status' => $isValid,
                     ],
@@ -126,6 +117,7 @@ class MatchComponent extends Component
                     content: __('notifications.bet_error'),
                     duration: 4000
                 );
+
             $this->dispatch('$refresh');
         } catch (Exception $e) {
             Log::error(self::class.' - Error saving user bet', ['error' => $e->getMessage()]);
@@ -163,7 +155,6 @@ class MatchComponent extends Component
                     'status' => false,
                     'obs' => $obs,
                 ]);
-
             });
 
             if ($isValid) {

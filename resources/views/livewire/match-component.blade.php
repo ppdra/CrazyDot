@@ -3,7 +3,6 @@
 @use('App\Enum\ReactionEmoji')
 
 <div class="rounded-2xl backdrop-blur-md border border-(--color-border) bg-(--color-background)">
-
     <div class="p-3 sm:p-4 space-y-3">
 
         <!-- Top row: badge + datetime -->
@@ -96,7 +95,7 @@
                     <x-ui.tab.group class="justify-start">
                         <x-ui.tab label="Bet" name="bet" icon="pencil" />
                         {{-- @if ($match->utc_date->isPast()) --}}
-                            <x-ui.tab label="Results" name="results" icon="document-chart-bar" />
+                        <x-ui.tab label="Results" name="results" icon="document-chart-bar" />
                         {{-- @endif --}}
                     </x-ui.tab.group>
 
@@ -167,17 +166,17 @@
                     </x-ui.tab.panel>
 
                     {{-- @if ($match->utc_date->isPast()) --}}
-                        <x-ui.tab.panel name="results">
+                    <x-ui.tab.panel name="results">
 
-                            <div class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl ">
-
-
-                                <livewire:game-bets-view :gameId="$match->id" :key="'game-bets-' . $match->id" />
+                        <div class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl ">
 
 
-                            </div>
-                        </x-ui.tab.panel>
-                        {{-- <x-ui.tab.panel name='results'>
+                            <livewire:game-bets-view :gameId="$match->id" :key="'game-bets-' . $match->id" />
+
+
+                        </div>
+                    </x-ui.tab.panel>
+                    {{-- <x-ui.tab.panel name='results'>
                             <div
                                 class="bg-(--color-background) border border-(--color-border)/10 rounded-2xl overflow-hidden">
 
