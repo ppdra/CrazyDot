@@ -53,7 +53,6 @@ class MatchComponent extends Component
             ->first();
     }
 
-    
     public function incrementScore($team)
     {
         match ($team) {
