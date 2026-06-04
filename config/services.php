@@ -40,4 +40,8 @@ return [
         'url' => env('FOOTBALL_DATA_API_URL'),
     ],
 
+    'telegram' => [
+        'chat_id' => env('TELEGRAM_GROUP_ID'),
+        'token' => env('TELEGRAM_TOKEN'),
+    ],
 ];
