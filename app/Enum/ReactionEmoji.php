@@ -24,6 +24,8 @@ enum ReactionEmoji: int
     case COLD = 18;
     case MILK = 19;
     case KRABBY = 20;
+    case GOZZILA = 21;
+    case SEAL = 22;
 
     public function emoji(): string
     {
@@ -48,6 +50,8 @@ enum ReactionEmoji: int
             self::COLD => '🥶',
             self::MILK => '🍼',
             self::KRABBY => '🦀',
+            self::GOZZILA => '🫈',
+            self::SEAL => '🦭',
         };
     }
 
