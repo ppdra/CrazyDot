@@ -50,4 +50,18 @@ class User extends Authenticatable
     {
         return $this->hasOne(Ranking::class, 'user_id');
     }
+
+    public function betReactions()
+    {
+        return $this->hasMany(BetReaction::class);
+    }
+
+    public function mostUsedEmojiId(): ?int
+    {
+        return $this->betReactions()
+            ->selectRaw('emoji_id, COUNT(*) as total')
+            ->groupBy('emoji_id')
+            ->orderByDesc('total')
+            ->value('emoji_id');
+    }
 }

@@ -13,3 +13,12 @@
 
 
  @custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */ 
+
+ @keyframes emoji-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

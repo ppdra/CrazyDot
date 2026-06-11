@@ -1,11 +1,23 @@
+@use('App\Enum\ReactionEmoji')
 @php
     $langs = [
         ['locale' => 'pt_BR', 'flag' => '🇧🇷', 'label' => 'PT'],
-        ['locale' => 'en', 'flag' => '🇺🇸', 'label' => 'EN']
+        ['locale' => 'en', 'flag' => '🇺🇸', 'label' => 'EN'],
     ];
 @endphp
 <x-ui.layout.header>
     <x-ui.sidebar.toggle class="md:hidden" />
+
+   <div class="overflow-hidden">
+    <div class="whitespace-nowrap animate-[emoji-scroll_20s_linear_infinite] inline-block">
+        @for ($a = 0; $a < 120; $a++)
+            <span class="mx-2 text-xl">
+                {{ ReactionEmoji::emojiFromId(auth()->user()->mostUsedEmojiId() ?? 1) }}
+            </span>
+        @endfor
+    </div>
+</div>
+
 
     <div class="flex ml-auto gap-x-3 items-center">
         <x-ui.dropdown position="bottom-end">
@@ -24,11 +36,13 @@
 
                 <x-ui.dropdown.group label="{{ __('header.language') }}">
                     @foreach ($langs as $lang)
-                        <x-ui.dropdown.item class="{{ App::getLocale() === $lang['locale'] ? 'bg-(--color-accent)/20' : '' }}" href="{{ route('lang.switch', ['locale' => $lang['locale']]) }}">
+                        <x-ui.dropdown.item
+                            class="{{ App::getLocale() === $lang['locale'] ? 'bg-(--color-accent)/20' : '' }}"
+                            href="{{ route('lang.switch', ['locale' => $lang['locale']]) }}">
                             {{ $lang['flag'] }} {{ $lang['label'] }}
                         </x-ui.dropdown.item>
                     @endforeach
-                    
+
 
                 </x-ui.dropdown.group>
 

@@ -59,7 +59,6 @@ class InsertMatchesResults extends Command
                     'result_id' => $result->id,
                 ]);
 
-                // calculate points for bets game.
                 $calculator->calculateMatchPoints($game);
             }
         }
