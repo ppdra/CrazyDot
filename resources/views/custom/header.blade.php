@@ -13,7 +13,7 @@
             <div class="whitespace-nowrap animate-[emoji-scroll_20s_linear_infinite] inline-block">
                 @for ($a = 0; $a < 120; $a++)
                     <span class="mx-2 text-xl">
-                        {{ ReactionEmoji::emojiFromId(auth()->user()->mostUsedEmojiId()) }}
+                        {{ ReactionEmoji::emojiFromId(auth()->user()->mostUsedEmojiId()) ?? '' }}
                     </span>
                 @endfor
             </div>
