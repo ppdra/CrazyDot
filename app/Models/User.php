@@ -51,17 +51,14 @@ class User extends Authenticatable
         return $this->hasOne(Ranking::class, 'user_id');
     }
 
-    public function betReactions()
+    public function mostReceivedEmojiId(): ?int
     {
-        return $this->hasMany(BetReaction::class);
-    }
-
-    public function mostUsedEmojiId(): ?int
-    {
-        return $this->betReactions()
-            ->selectRaw('emoji_id, COUNT(*) as total')
-            ->groupBy('emoji_id')
+        return BetReaction::query()
+            ->join('bets', 'bets.id', '=', 'bet_reactions.bet_id')
+            ->where('bets.user_id', $this->id)
+            ->selectRaw('bet_reactions.emoji_id, COUNT(*) as total')
+            ->groupBy('bet_reactions.emoji_id')
             ->orderByDesc('total')
-            ->value('emoji_id');
+            ->value('bet_reactions.emoji_id');
     }
 }
