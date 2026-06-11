@@ -8,15 +8,17 @@
 <x-ui.layout.header>
     <x-ui.sidebar.toggle class="md:hidden" />
 
-   <div class="overflow-hidden">
-    <div class="whitespace-nowrap animate-[emoji-scroll_20s_linear_infinite] inline-block">
-        @for ($a = 0; $a < 120; $a++)
-            <span class="mx-2 text-xl">
-                {{ ReactionEmoji::emojiFromId(auth()->user()->mostUsedEmojiId() ?? 1) }}
-            </span>
-        @endfor
-    </div>
-</div>
+    @if (auth()->user()->mostUsedEmojiId())
+        <div class="overflow-hidden">
+            <div class="whitespace-nowrap animate-[emoji-scroll_20s_linear_infinite] inline-block">
+                @for ($a = 0; $a < 120; $a++)
+                    <span class="mx-2 text-xl">
+                        {{ ReactionEmoji::emojiFromId(auth()->user()->mostUsedEmojiId()) }}
+                    </span>
+                @endfor
+            </div>
+        </div>
+    @endif
 
 
     <div class="flex ml-auto gap-x-3 items-center">
