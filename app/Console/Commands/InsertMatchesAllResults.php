@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enum\MatchStatusEnum;
 use App\Models\Game;
 use App\Models\Result;
 use App\Services\Apis\FootballDataOrg\ApiService;
@@ -37,6 +38,12 @@ class InsertMatchesAllResults extends Command
 
             if (! $game) {
                 continue;
+            }
+
+            if ($game->status !== MatchStatusEnum::FINISHED) {
+                $game->update([
+                    'status' => MatchStatusEnum::FINISHED,
+                ]);
             }
 
             if (! $game->gameResult()->exists()) {
