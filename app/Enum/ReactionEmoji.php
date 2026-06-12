@@ -27,6 +27,9 @@ enum ReactionEmoji: int
     case GOZZILA = 21;
     case SEAL = 22;
     case SATAN = 23;
+    case MUSHROOMS = 24;
+    case HALLUCINATED = 25;
+    case NO_FACE = 26;
 
     public function emoji(): string
     {
@@ -54,6 +57,9 @@ enum ReactionEmoji: int
             self::GOZZILA => '🫈',
             self::SEAL => '🦭',
             self::SATAN => '👺',
+            self::MUSHROOMS => '🍄',
+            self::HALLUCINATED => '😵‍💫',
+            self::NO_FACE => '🫥',
         };
     }
 
