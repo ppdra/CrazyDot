@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->integer('home_score');
-            $table->integer('away_score');
+            $table->integer('home_score')->default(0);
+            $table->integer('away_score')->default(0);
             $table->timestamps();
 
             $table->unique(['home_score', 'away_score']);
