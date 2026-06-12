@@ -30,6 +30,9 @@ enum ReactionEmoji: int
     case MUSHROOMS = 24;
     case HALLUCINATED = 25;
     case NO_FACE = 26;
+    case ELEPHANT = 27;
+    case LION = 28;
+    case STATUE_LIBERTY = 29;
 
     public function emoji(): string
     {
@@ -60,6 +63,9 @@ enum ReactionEmoji: int
             self::MUSHROOMS => '🍄',
             self::HALLUCINATED => '😵‍💫',
             self::NO_FACE => '🫥',
+            self::ELEPHANT => '🐘',
+            self::LION => '🐅',
+            self::STATUE_LIBERTY => '🗽',
         };
     }
 
