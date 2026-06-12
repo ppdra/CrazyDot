@@ -2,10 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Imports\DatabaseBackupImport;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
 class RestoreDatabaseFromBackup extends Command
 {
@@ -26,24 +23,25 @@ class RestoreDatabaseFromBackup extends Command
     /**
      * Execute the console command.
      */
-
     public function handle()
     {
         $file = $this->argument('file');
 
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             $this->error("Ficheiro não encontrado: {$file}");
+
             return 1;
         }
 
-        $this->warn("⚠️  Isto vai substituir todos os dados da DB!");
+        $this->warn('⚠️  Isto vai substituir todos os dados da DB!');
 
-        if (!$this->confirm('Confirmas o restore?')) {
+        if (! $this->confirm('Confirmas o restore?')) {
             $this->info('Cancelado.');
+
             return 0;
         }
 
-        $db   = config('database.connections.mysql.database');
+        $db = config('database.connections.mysql.database');
         $user = config('database.connections.mysql.username');
         $pass = config('database.connections.mysql.password');
         $host = config('database.connections.mysql.host');
@@ -58,7 +56,8 @@ class RestoreDatabaseFromBackup extends Command
 
         exec("mysql -h {$host} -u {$user} -p{$pass} {$db} < {$sqlFile}");
 
-        $this->info("✅ Restore concluído.");
+        $this->info('✅ Restore concluído.');
+
         return 0;
     }
 }

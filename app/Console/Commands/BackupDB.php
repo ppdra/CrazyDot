@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Exports\DatabaseBackupExport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Maatwebsite\Excel\Facades\Excel;
 
 class BackupDB extends Command
 {
@@ -36,17 +34,18 @@ class BackupDB extends Command
         // 2. Encontra o ficheiro mais recente
         $backupPath = $this->latestBackup();
 
-        if (!$backupPath) {
+        if (! $backupPath) {
             $this->error('Nenhum backup encontrado após o run.');
+
             return 1;
         }
 
         $this->info("Backup encontrado: {$backupPath}");
 
         // 3. Envia para o Telegram
-        $token  = config('services.telegram.token');
+        $token = config('services.telegram.token');
         $chatId = config('services.telegram.chat_id');
-        $date   = now()->format('Y-m-d H:i');
+        $date = now()->format('Y-m-d H:i');
 
         $response = Http::attach(
             'document',
@@ -60,7 +59,8 @@ class BackupDB extends Command
         if ($response->successful()) {
             $this->info('✅ Backup enviado para o Telegram.');
         } else {
-            $this->error('❌ Erro ao enviar para o Telegram: ' . $response->body());
+            $this->error('❌ Erro ao enviar para o Telegram: '.$response->body());
+
             return 1;
         }
 
@@ -70,17 +70,19 @@ class BackupDB extends Command
     private function latestBackup(): ?string
     {
         $appName = str_replace(' ', '\ ', config('app.name'));
-        $files   = glob(storage_path("app/{$appName}/*/*/*.sql.gz"));
+        $files = glob(storage_path("app/private/{$appName}/*.zip"));
 
         if (empty($files)) {
             // tenta sem espaços escapados
-            $files = glob(storage_path('app/' . config('app.name') . '/*/*/*.sql.gz'));
+            $files = glob(storage_path('app/'.config('app.name').'/*/*/*.sql.gz'));
         }
 
-        if (empty($files)) return null;
+        if (empty($files)) {
+            return null;
+        }
 
         // ordena por data de modificação e retorna o mais recente
-        usort($files, fn($a, $b) => filemtime($b) - filemtime($a));
+        usort($files, fn ($a, $b) => filemtime($b) - filemtime($a));
 
         return $files[0];
     }
