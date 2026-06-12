@@ -27,37 +27,59 @@ class RestoreDatabaseFromBackup extends Command
     {
         $file = $this->argument('file');
 
-        if (! file_exists($file)) {
+        if (!file_exists($file)) {
             $this->error("Ficheiro não encontrado: {$file}");
-
             return 1;
         }
 
-        $this->warn('⚠️  Isto vai substituir todos os dados da DB!');
+        $this->warn("⚠️  Isto vai substituir todos os dados da DB!");
 
-        if (! $this->confirm('Confirmas o restore?')) {
+        if (!$this->confirm('Confirmas o restore?')) {
             $this->info('Cancelado.');
-
             return 0;
         }
 
-        $db = config('database.connections.mysql.database');
+        $db   = config('database.connections.mysql.database');
         $user = config('database.connections.mysql.username');
         $pass = config('database.connections.mysql.password');
         $host = config('database.connections.mysql.host');
 
-        // descomprime se for .gz
-        if (str_ends_with($file, '.gz')) {
-            $sqlFile = str_replace('.gz', '', $file);
-            exec("gunzip -c {$file} > {$sqlFile}");
-        } else {
-            $sqlFile = $file;
+        // directório temporário para extrair
+        $tmpDir = storage_path('app/restore_tmp');
+        mkdir($tmpDir, 0755, true);
+
+        // 1. Descompacta o .zip
+        $this->info('A descompactar o zip...');
+        $zip = new \ZipArchive();
+        $zip->open($file);
+        $zip->extractTo($tmpDir);
+        $zip->close();
+
+        // 2. Encontra o .sql dentro do zip
+        $sqlFiles = glob("{$tmpDir}/db-dumps/*.sql");
+
+        if (empty($sqlFiles)) {
+            $this->error('Nenhum ficheiro .sql encontrado dentro do zip.');
+            exec("rm -rf {$tmpDir}");
+            return 1;
         }
 
+        $sqlFile = $sqlFiles[0];
+
+        // 3. Importa diretamente (sem gunzip)
+        $this->info('A preparar o ficheiro SQL...');
+        $sql = file_get_contents($sqlFile);
+        $sql = preg_replace('/^SET @@SESSION\.SQL_LOG_BIN.*$/m', '', $sql);
+        $sql = preg_replace('/^SET @@GLOBAL\.GTID_PURGED.*$/m', '', $sql);
+        file_put_contents($sqlFile, $sql);
+
+        $this->info('A importar para a base de dados...');
         exec("mysql -h {$host} -u {$user} -p{$pass} {$db} < {$sqlFile}");
 
-        $this->info('✅ Restore concluído.');
+        // 4. Limpa os temporários
+        exec("rm -rf {$tmpDir}");
 
+        $this->info("✅ Restore concluído.");
         return 0;
     }
 }
