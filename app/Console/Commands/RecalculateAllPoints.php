@@ -43,7 +43,7 @@ class RecalculateAllPoints extends Command
             $resetRankings = Ranking::query()->update([
                 'points'                     => 0,
                 'position'                   => null,
-                'last_position'              => null,
+                'last_position'              => 0,
                 'current_full_points_streak' => 0,
                 'best_full_points_streak'    => 0,
                 'current_non_points_streak'  => 0,
