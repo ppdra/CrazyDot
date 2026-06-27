@@ -49,4 +49,4 @@ app(Schedule::class)->command('crazy:insert-matches')->dailyAt('00:00');
 
 app(Schedule::class)->command('crazy:insert-matches-all-results')->everyTwoHours();
 
-app(Schedule::class)->command('crazy:backup-to-xlsx')->twiceDaily(3, 15);
+app(Schedule::class)->command('crazy:backup-db')->twiceDaily(3, 15);
