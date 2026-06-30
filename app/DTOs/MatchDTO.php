@@ -26,6 +26,13 @@ final class MatchDTO
 
     public static function fromApi(object $match): self
     {
+        if ($match->stage !== MatchStageEnum::GROUP_STAGE->value) {
+            $homeScore = $match->score['regularTime']['home'] ?? null;
+            $awayScore = $match->score['regularTime']['away'] ?? null;
+        } else {
+            $homeScore = $match->score['fullTime']['home'] ?? null;
+            $awayScore = $match->score['fullTime']['away'] ?? null;
+        }
         return new self(
             externalId: $match->id,
             externalHomeId: $match->homeTeam['id'] ?? null,
@@ -35,8 +42,8 @@ final class MatchDTO
             stage: MatchStageEnum::tryFrom($match->stage) ?? null,
             utcDate: Carbon::parse($match->utcDate)->utc(),
             status: MatchStatusEnum::fromApi($match->status),
-            homeScore: $match->score['fullTime']['home'] ?? null,
-            awayScore: $match->score['fullTime']['away'] ?? null,
+            homeScore: $homeScore,
+            awayScore: $awayScore,
         );
     }
 }
