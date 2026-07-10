@@ -44,7 +44,7 @@
                     <div class="mt-3 flex items-center justify-between gap-3">
                         <!-- Home -->
                         <div class="flex min-w-0 items-center gap-3">
-                            <img src="{{ $game->homeTeam->logo_url ?? '' }}" alt="{{ $game->homeTeam->name }}"
+                            <img src="{{ $game->homeTeam->logo_url ?? '' }}" alt="{{ $game->homeTeam->name ?? '' }}"
                                 class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none';" />
                             <div class="min-w-0">
                                 <p class="truncate text-sm font-semibold text-(--color-primary)">
@@ -65,7 +65,7 @@
                                 <p class="truncate text-sm font-semibold text-(--color-primary)">
                                     {{ $game->awayTeam->slug ?? '' }}</p>
                             </div>
-                            <img src="{{ $game->awayTeam->logo_url ?? '' }}" alt="{{ $game->awayTeam->name }}"
+                            <img src="{{ $game->awayTeam->logo_url ?? '' }}" alt="{{ $game->awayTeam->name ?? '' }}"
                                 class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none';" />
                         </div>
                     </div>
